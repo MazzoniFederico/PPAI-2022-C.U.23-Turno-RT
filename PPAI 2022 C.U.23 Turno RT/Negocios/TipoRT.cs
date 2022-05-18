@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 {
-    class TipoRT
+    public class TipoRT
     {
-        private String nombre { get; set; }
-        private String descripcion { get; set; }
+        private string nombre { get; set; }
+        private string descripcion { get; set; }
+
+        public void setNombre(string nom)
+        {
+            nombre = nom;
+        }
+
+        public void setDescripcion(string des)
+        {
+            descripcion = des;
+        }
     }
 }

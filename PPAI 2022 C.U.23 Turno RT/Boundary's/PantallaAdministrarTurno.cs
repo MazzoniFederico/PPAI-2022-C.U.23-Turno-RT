@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPAI_2022_C.U._23_Turno_RT.Negocios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         public PantallaAdministrarTurno()
         {
             InitializeComponent();
+        }
+
+        public void mostrarTipoRT(List<TipoRT> tipoRTs)
+        {
+            return;
         }
     }
 }

@@ -89,6 +89,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorio\BaseDatos.cs" />
+    <Compile Include="Repositorio\RepositorioTipoRT.cs" />
     <EmbeddedResource Include="Boundary%27s\PantallaAdministrarTurno.resx">
       <DependentUpon>PantallaAdministrarTurno.cs</DependentUpon>
     </EmbeddedResource>
