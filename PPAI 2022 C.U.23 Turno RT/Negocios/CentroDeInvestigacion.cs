@@ -43,7 +43,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             foreach (var i in recurso)
             {
                 string var = "";
-                var +=  i.getNumeroRT().ToString();
+                var += this.nombre;
+                var += " " + i.getNumeroRT().ToString();
                 var += " " + i.miModeloYMarca();
                 var += " " + i.getEstado();
                 datosRercurso.Add(var);
@@ -55,6 +56,57 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         public string getNombre()
         {
             return nombre;
+        }
+
+        public bool esCientificoMiCentro(Usuario usuario)
+        {
+            foreach (var asignacion in asignacionCientificoCI)
+            {
+                if(asignacion.esCientificoMiCentro(usuario))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public string buscarEmailCientifico(Usuario usuario)
+        {
+            foreach (var asignacion in asignacionCientificoCI)
+            {
+                if (asignacion.esCientificoMiCentro(usuario))
+                {
+                    return asignacion.getEmailCientifico();
+                }
+            }
+            return "";
+        }
+
+        public RecursoTecnologico esRecursoSeleccionado(string RT)
+        {
+            foreach (RecursoTecnologico recurso in recursoTecnologico)
+            {
+                if (recurso.esRecursoSeleccionado(RT))
+                {
+                    return recurso;
+                }
+            }
+            return null;
+        }
+
+        public List<Turno> buscarTurnoPosteriorFechaActual(DateTime fechaActual, string RT)
+        {
+            return esRecursoSeleccionado(RT).buscarTurnoPosteriorFechaActual(fechaActual);
+            
+        }
+
+        public bool esCentroSeleccionado(string nombre)
+        {
+            if(this.nombre == nombre)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

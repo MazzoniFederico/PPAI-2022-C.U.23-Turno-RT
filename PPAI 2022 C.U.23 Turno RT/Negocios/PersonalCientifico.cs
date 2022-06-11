@@ -16,5 +16,21 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private String correoElectronicoPersonal { get; set; }
         private String telefonoCelular { get; set; }
         private Usuario usuario { get; set; }
+
+
+        //Deberia ser SESION
+        public bool validarUsuarioLogeado(Usuario usuario)
+        {
+            if (this.usuario == usuario)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public string getEmailInstitucional()
+        {
+            return correoElectronicoInstitucional;
+        }
     }
 }

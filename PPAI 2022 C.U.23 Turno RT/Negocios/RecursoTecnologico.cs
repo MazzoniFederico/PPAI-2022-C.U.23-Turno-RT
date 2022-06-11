@@ -65,6 +65,41 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return "Baja Definitiva";
         }
 
+        public bool esRecursoSeleccionado(string RT)
+        {
+            if(RT == numeroRT.ToString() + " " + miModeloYMarca())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public List<Turno> buscarTurnoPosteriorFechaActual(DateTime fechaActual)
+        {
+            List<Turno> turnosPosteriores = null;
+            foreach (Turno T in turno)
+            {
+                if(T.esPosteriorFechaActual(fechaActual))
+                {
+                    turnosPosteriores.Add(T);
+                }
+            }
+
+            return turnosPosteriores;
+        }
+
+        public Turno esTurnoSeleccionado(String turnoSeleccionado)
+        {
+            string[] turnos = turnoSeleccionado.Split(' ');
+            foreach (Turno T in turno)
+            {
+                if(T.esTurnoSeleccionado(turnos[2], turnos[3]))
+                {
+                    return T;
+                }
+            }
+            return null;
+        }
     }
 
     

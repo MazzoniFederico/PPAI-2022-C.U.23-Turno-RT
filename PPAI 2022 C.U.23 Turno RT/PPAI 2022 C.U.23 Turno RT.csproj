@@ -83,12 +83,14 @@
     <Compile Include="Negocios\Modelo.cs" />
     <Compile Include="Negocios\PersonalCientifico.cs" />
     <Compile Include="Negocios\RecursoTecnologico.cs" />
+    <Compile Include="Negocios\Sesion.cs" />
     <Compile Include="Negocios\TipoRT.cs" />
     <Compile Include="Negocios\Turno.cs" />
     <Compile Include="Negocios\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorio\BaseDatos.cs" />
+    <Compile Include="Repositorio\RepositorioSesion.cs" />
     <Compile Include="Repositorio\RepositorioTipoRT.cs" />
     <EmbeddedResource Include="Boundary%27s\PantallaAdministrarTurno.resx">
       <DependentUpon>PantallaAdministrarTurno.cs</DependentUpon>

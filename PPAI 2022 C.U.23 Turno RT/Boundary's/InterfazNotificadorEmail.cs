@@ -16,5 +16,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         {
             InitializeComponent();
         }
+
+        public void enviarNotificacionEmail(string opcionNotificacion,string direccionEmail)
+        {
+
+        }
     }
 }

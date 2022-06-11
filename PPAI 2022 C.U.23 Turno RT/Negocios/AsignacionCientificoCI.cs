@@ -10,5 +10,17 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
     {
         private DateTime fechaDesde { get; set; }
         private DateTime fechaHasta { get; set; }
+        private PersonalCientifico personalCientifico {get; set; }
+
+        public bool esCientificoMiCentro(Usuario usuario)
+        {
+
+            return personalCientifico.validarUsuarioLogeado(usuario);
+        }
+
+        public string getEmailCientifico()
+        {
+            return personalCientifico.getEmailInstitucional();
+        }
     }
 }
