@@ -12,7 +12,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
     public class GestorTurnoRT
     {
         private Usuario usuario;
-        private List<TipoRT> tipoRT;
+        private List<TipoRT> tipoRTs;
+        private List<TipoRT> tipoRTSeleccionada;
+        private List<CentroDeInvestigacion> centroDeInvestigacion;
+        private List<string> recursoTecnologico;
+        private List<List<string>> recursoTecnologicoPorCentro;
+
         public GestorTurnoRT(Usuario usuario)
         {
             this.usuario = usuario;
@@ -20,14 +25,55 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
 
         public void opcionReservarTurno(PantallaAdministrarTurno pantallaAdministrarTurno)
         {
-            tipoRT = buscarTipoRT();
-            pantallaAdministrarTurno.mostrarTipoRT(tipoRT);
+            tipoRTs = buscarTipoRT();
+            pantallaAdministrarTurno.mostrarTipoRT(tipoRTs);
+            //pantalla inicia tomarTipoRT
+            buscarRTPorTipo();
+            pantallaAdministrarTurno.mostrarDatosRT(recursoTecnologicoPorCentro);
+            pantallaAdministrarTurno.solicitarSeleccionRT();
+            
         }
 
         public List<TipoRT> buscarTipoRT()
         {
             // iterador que retorne tipoRTs
             return RepositorioTipoRT.GetTipoRTs();
+        }
+
+        public void tomarTipoRT(List<TipoRT> tipoRT)
+        {
+            this.tipoRTSeleccionada = tipoRT;
+            return;
+        }
+
+        public void buscarRTPorTipo()
+        {
+          
+            List<string> recursosCentro;
+            for (var i = 0; i < centroDeInvestigacion.Count; i++)
+            {
+                string nombreCentro = centroDeInvestigacion[i].getNombre();
+                recursosCentro = centroDeInvestigacion[i].buscarRTPorTipo(tipoRTSeleccionada);
+
+                for (int j = 0; j < recursosCentro.Count; j++)
+                {
+                    recursoTecnologico.Add(recursosCentro[j]);
+                    
+                    recursoTecnologicoPorCentro[j][0] = nombreCentro;
+                    recursoTecnologicoPorCentro[j][1] = recursosCentro[j];
+
+
+                }
+
+            }
+
+
+
+        }
+
+        public void ordenarRTPorCentroDeInvestigacion()
+        {
+
         }
     }
 }

@@ -22,5 +22,15 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         {
             return;
         }
+
+        public void mostrarDatosRT(List<List<string>> datosRTPorCentro)
+        {
+            return;
+        }
+
+        public void solicitarSeleccionRT()
+        {
+            return;
+        }
     }
 }

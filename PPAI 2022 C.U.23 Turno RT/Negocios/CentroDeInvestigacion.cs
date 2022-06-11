@@ -27,5 +27,34 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private List<AsignacionCientificoCI> asignacionCientificoCI { get; set; }
         private List<RecursoTecnologico> recursoTecnologico { get; set; }
 
+
+        public List<string> buscarRTPorTipo(List<TipoRT> tipoRT)
+        {
+            List<RecursoTecnologico> recurso = null;
+            List<string> datosRercurso = null;
+            for (int i = 0; i < recursoTecnologico.Count; i++)
+            {
+                if (recursoTecnologico[i].esTipoRTSeleccionado(tipoRT))
+                {
+                    recurso.Add(recursoTecnologico[i]);
+                }
+            }
+
+            foreach (var i in recurso)
+            {
+                string var = "";
+                var +=  i.getNumeroRT().ToString();
+                var += " " + i.miModeloYMarca();
+                var += " " + i.getEstado();
+                datosRercurso.Add(var);
+            }
+            return datosRercurso;
+            
+        }
+       
+        public string getNombre()
+        {
+            return nombre;
+        }
     }
 }

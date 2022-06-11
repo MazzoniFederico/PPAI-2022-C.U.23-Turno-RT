@@ -14,5 +14,19 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private bool esReservable { get; set; }
         private bool esCancelable { get; set; }
 
+        public bool estasDadoDeBaja()
+        {
+            if (nombre != "baja tecnica" || nombre != "baja definitiva")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public string getNombre()
+        {
+            return nombre;
+        }
+
     }
 }

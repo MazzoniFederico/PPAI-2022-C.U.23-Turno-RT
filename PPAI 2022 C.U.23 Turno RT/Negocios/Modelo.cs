@@ -9,5 +9,16 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
     class Modelo
     {
         private String nombre { get; set; }
+        private Marca marca { get; set; }
+
+        public string getNombre()
+        {
+            return nombre;
+        }
+
+        public string getNombreMarca()
+        {
+            return marca.getNombre();
+        }
     }
 }

@@ -17,5 +17,55 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private List<Turno> turno { get; set; }
         private List<CambioDeEstadoRT> cambioDeEstadoRT { get; set; }
         private TipoRT tipoRT { get; set;  }
+        private Modelo modelo { get; set; }
+
+        public bool esTipoRTSeleccionado(List<TipoRT> tipo)
+        {
+            for (int i = 0; i < tipo.Count; i++)
+            {
+                if(tipo[i] == tipoRT)
+                {
+                    for (int j = 0; j < cambioDeEstadoRT.Count; j++)
+                    {
+                        cambioDeEstadoRT[j].queEstadoActivo();
+                    }
+                    
+                }
+            }
+            return false;
+        }
+
+        public int getNumeroRT()
+        {
+            return numeroRT;
+        }
+
+        public string miModeloYMarca()
+        {
+            string modeloYMarca = "";
+
+            modeloYMarca += modelo.getNombre();
+            modeloYMarca += " " + modelo.getNombreMarca();
+
+            return modeloYMarca;
+        }
+
+        public string getEstado()
+        {
+            string var = "";
+            foreach (var cambioEstado in cambioDeEstadoRT)
+            {
+                 var = cambioEstado.getEstado();
+                if (var != null)
+                {
+                    return var;
+                }
+            }
+
+            return "Baja Definitiva";
+        }
+
     }
+
+    
 }
