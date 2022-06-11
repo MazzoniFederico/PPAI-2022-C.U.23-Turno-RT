@@ -12,6 +12,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private DateTime fechaHoraHasta { get; set; }
         private Estado estado { get; set; }
 
+        public CambioDeEstadoTurno()
+        {
+
+        }
         public CambioDeEstadoTurno(Estado nuevoEstado, DateTime desde)
         {
             estado = nuevoEstado;
