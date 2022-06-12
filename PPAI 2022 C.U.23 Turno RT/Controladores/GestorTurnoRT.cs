@@ -108,7 +108,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             for (int i = 0; i < turnos.Count; i++)
             {
                 turnosPorDia[i] = turnos[i].getFechaHoraInicio().ToString("dd-MM-yyyy");
-                turnosPorDia[i] += " " + turnos[i].cambioEstadoActual().GetEstado().getNombre();
+                turnosPorDia[i] += " " + turnos[i].cambioEstadoActual().getEstado().getNombre();
                 turnosPorDia[i] += " " + turnos[i].getFechaHoraInicio().ToString();
                 turnosPorDia[i] += " " + turnos[i].getFechaHoraFin().ToString();
                 //a[i][4] = turnos[i].getDiaSemana();

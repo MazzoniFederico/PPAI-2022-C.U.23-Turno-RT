@@ -14,9 +14,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private String edificio { get; set; }
         private String piso { get; set; }
         private String coordenadas { get; set; }
-        private String telefonosContacto { get; set; }
+        private String telefonoContacto { get; set; }
         private String correoElectronico { get; set; }
-        private String numeroResolucionCreacion { get; set; }
+        private int numeroResolucionCreacion { get; set; }
         private DateTime fechaResolucionCreacion { get; set; }
         private String reglamento { get; set; }
         private String caracteristicasGenerales { get; set; }
@@ -26,6 +26,80 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private String motivoBaja { get; set; }
         private List<AsignacionCientificoCI> asignacionCientificoCI { get; set; }
         private List<RecursoTecnologico> recursoTecnologico { get; set; }
+
+        public void setFechaAlta(DateTime fecha)
+        {
+            fechaAlta = fecha;
+        }
+        public void setFechaBaja(DateTime fecha)
+        {
+            fechaBaja = fecha;
+        }
+        public void setFechaResolucionCreacion(DateTime fecha)
+        {
+            fechaResolucionCreacion = fecha;
+        }
+        public void setSigla(string sigla)
+        {
+            this.sigla = sigla;
+        }
+        public void setNombre(string nombre)
+        {
+            this.nombre = nombre;
+        }
+        public void setDireccion(string direccion)
+        {
+            this.direccion = direccion;
+        }
+        public void setEdificio(string edificio)
+        {
+            this.edificio = edificio;
+        }
+        public void setPiso(string piso)
+        {
+            this.piso = piso;
+        }
+        public void setCoordenadas(string coordenadas)
+        {
+            this.coordenadas = coordenadas;
+        }
+        public void setTelefonoContacto(string telefono)
+        {
+            telefonoContacto = telefono;
+        }
+        public void setCorreoElectronico(string correo)
+        {
+            correoElectronico = correo;
+        }
+        public void setNumeroResolucionCreacion(int numero)
+        {
+            numeroResolucionCreacion = numero;
+        }
+        public void setReglamento(string reglamento)
+        {
+            this.reglamento = reglamento;
+        }
+        public void setCaracteristicasGenerales(string caracteristicas)
+        {
+            caracteristicasGenerales = caracteristicas;
+        }
+        public void setTiempoAntelacionReserva(string tiempoAntelacion)
+        {
+            this.tiempoAntelacionReserva = tiempoAntelacion;
+        }
+        public void setMotivoBaja(string motivo)
+        {
+            motivoBaja = motivo;
+        }
+        public void setAsignacionCientificoCI(List<AsignacionCientificoCI> asignacionCientificoCI)
+        {
+            this.asignacionCientificoCI = asignacionCientificoCI;
+        }
+        public void setRecursoTecnologico(List<RecursoTecnologico> recurso)
+        {
+            recursoTecnologico = recurso;
+        }
+
 
 
         public List<string> buscarRTPorTipo(List<TipoRT> tipoRT)

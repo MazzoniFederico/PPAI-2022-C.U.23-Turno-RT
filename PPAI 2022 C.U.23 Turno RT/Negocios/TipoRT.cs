@@ -11,6 +11,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private string nombre { get; set; }
         private string descripcion { get; set; }
 
+
         public void setNombre(string nom)
         {
             nombre = nom;

@@ -16,17 +16,24 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         {
 
         }
-
-        public void setFechaHoraHasta(DateTime fecha)
-        {
-            fechaHoraHasta = fecha;
-        }
         public CambioDeEstadoTurno(Estado nuevoEstado, DateTime desde)
         {
             estado = nuevoEstado;
             fechaHoraDesde = desde;
         }
-        public Estado GetEstado()
+        public void setFechaHoraDesde(DateTime fecha)
+        {
+            fechaHoraDesde = fecha;
+        }
+        public void setFechaHoraHasta(DateTime fecha)
+        {
+            fechaHoraHasta = fecha;
+        }
+        public void setEstado(Estado estado)
+        {
+            this.estado = estado;
+        }
+        public Estado getEstado()
         {
             return estado;
         }
@@ -38,11 +45,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
                 return true;
             }
             return false;
-        }
-
-        public void setFechaHoraHasta(DateTime fechaActual)
-        {
-            fechaHoraHasta = fechaActual;
         }
     }
 }

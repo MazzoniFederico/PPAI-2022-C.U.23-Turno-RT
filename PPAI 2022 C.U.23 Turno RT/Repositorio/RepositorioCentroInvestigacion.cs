@@ -37,7 +37,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                 if (resultado["fechaBaja"].ToString() != null)
                 {
                     centroDeInvestigacion.setFechaBaja(DateTime.Parse(resultado["fechaBaja"].ToString()));
-                    centroDeInvestigacion.setMotivoBaja(DateTime.Parse(resultado["motivoBaja"].ToString()));
+                    centroDeInvestigacion.setMotivoBaja(resultado["motivoBaja"].ToString());
                 }
                 string consulta2 = "SELECT * FROM RECURSOTECNOLOGICO WHERE nombreCentro = " + centroDeInvestigacion.getNombre();
                 DataTable resRT = bd.consulta(consulta);
@@ -46,12 +46,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
 
                 foreach (DataRow res in resRT.Rows)
                 {
-                    recursoTecnologico.setNumeroRT(Int32.Parse(respuesta["numeroRT"].ToString()));
-                    recursoTecnologico.setFechaAlta(respuesta["fechaAlta"].ToString());
-                    recursoTecnologico.setImagenes(respuesta["imagenes"].ToString());
-                    recursoTecnologico.setPeriodicidadMantenimientoPreventivo(respuesta["periodicidadMantenimientoPreventivo"].ToString());
-                    recursoTecnologico.setDuracionMantenimientoPreventivo(respuesta["duracionMantenimientoPreventivo"].ToString());
-                    recursoTecnologico.setFraccionHorarioTurnos(respuesta["fraccionHorarioTurnos"].ToString());
+                    recursoTecnologico.setNumeroRT(Int32.Parse(res["numeroRT"].ToString()));
+                    recursoTecnologico.setFechaAlta(DateTime.Parse(res["fechaAlta"].ToString()));
+                    recursoTecnologico.setImagenes(res["imagenes"].ToString());
+                    recursoTecnologico.setPeriodicidadMantenimientoPreventivo(Int32.Parse(res["periodicidadMantenimientoPreventivo"].ToString()));
+                    recursoTecnologico.setDuracionMantenimientoPreventivo(Int32.Parse(res["duracionMantenimientoPreventivo"].ToString()));
+                    recursoTecnologico.setFraccionHorarioTurnos(Int32.Parse(res["fraccionHorarioTurnos"].ToString()));
 
                     recursoTecnologicos.Add(recursoTecnologico);
 
@@ -91,7 +91,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                             cambioDeEstadoTurnos.Add(cambioDeEstadoTurno);
                         }
 
-                        turno.setCambioEstadoTurno(cambioDeEstadoTurnos);
+                        turno.setCambioDeEstadoTurno(cambioDeEstadoTurnos);
 
                     }
                     string consulta7 = "SELECT * FROM TIPORT WHERE numeroRT= " + recursoTecnologico.getNumeroRT();
@@ -137,7 +137,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                         cambioDeEstadoRTs.Add(cambioDeEstadoRT);
                     }
 
-                    recursoTecnologico.SetTurno(listaTurnos);
+                    recursoTecnologico.setTurno(listaTurnos);
                 }
 
                 string consulta3 = "SELECT * FROM ASIGNACIONCIENTIFICODELCI INNER JOIN PERSONALCIENTIFICO pc ON id = pcIdAsignacion INNER JOIN USUARIO u ON pc.numeroUsuario = u.usuario WHERE nombreCI = " + centroDeInvestigacion.getNombre();
@@ -149,23 +149,24 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                 foreach (DataRow resP in resPersonal.Rows)
                 {
 
-                    personalCientifico.setLegajo(Int64.Parse(resP["legajo"].ToString()));
+                    personalCientifico.setLegajo(Int32.Parse(resP["legajo"].ToString()));
                     personalCientifico.setNombre(resP["nombre"].ToString());
                     personalCientifico.setApellido(resP["apellido"].ToString());
-                    personalCientifico.setNumeroDocumento(Int64.Parse(resP["dni"].ToString()));
-                    personalCientifico.setcorreoElectronicoInstitucional(resP["correoIntitucional"].ToString());
-                    personalCientifico.setcorreoElectronicoPersonal(resP["correoPersonal"].ToString());
-                    personalCientifico.setTelefonoCelular(Int64.Parse(resP["telefonoCelular"].ToString()));
+                    personalCientifico.setNumeroDocumento(Int32.Parse(resP["dni"].ToString()));
+                    personalCientifico.setCorreoElectronicoInstitucional(resP["correoIntitucional"].ToString());
+                    personalCientifico.setCorreoElectronicoPersonal(resP["correoPersonal"].ToString());
+                    personalCientifico.setTelefonoCelular(resP["telefonoCelular"].ToString());
 
-                    asignacionCientificoCI.setFechaDesde(resP["fechaDesde"].ToString());
-                    asignacionCientificoCI.setFechaHasta(resP["fechaHasta"].ToString());
+                    asignacionCientificoCI.setFechaDesde(DateTime.Parse(resP["fechaDesde"].ToString()));
+                    asignacionCientificoCI.setFechaHasta(DateTime.Parse(resP["fechaHasta"].ToString()));
 
                     asignacionCientificoCI.setPersonalCientifico(personalCientifico);
 
-                    asignacionCientificoCIs.Add(asignacionCientificoCI)
+                    asignacionCientificoCIs.Add(asignacionCientificoCI);
 
-                    usuario.setNombre(resP["nombreUsuario"].ToString());
-                    usuario.setContraseña(resP["contraseña"].ToString());
+                    usuario.setUsuario(resP["usuario"].ToString());
+                    usuario.setClave(resP["contraseña"].ToString());
+                    usuario.setHabilitado(bool.Parse(resP["habilitado"].ToString()));
 
                     personalCientifico.setUsuario(usuario);
                 }

@@ -19,6 +19,47 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private TipoRT tipoRT { get; set;  }
         private Modelo modelo { get; set; }
 
+        public void setNumeroRT(int numero)
+        {
+            numeroRT = numero;
+        }
+        public void setFechaAlta(DateTime fecha)
+        {
+            fechaAlta = fecha;
+        }
+        public void setImagenes(string imagen)
+        {
+            imagenes = imagen;
+        }
+        public void setPeriodicidadMantenimientoPreventivo(int numero)
+        {
+            periodicidadMantenimientoPreventivo = numero;
+        }
+        public void setDuracionMantenimientoPreventivo(int numero)
+        {
+            duracionMantenimientoPreventivo = numero;
+        }
+        public void setFraccionHorarioTurnos(int numero)
+        {
+            fraccionHorarioTurnos = numero;
+        }
+        public void setTurno(List<Turno> turno)
+        {
+            this.turno = turno;
+        }
+        public void setCambioEstadoRT(List<CambioDeEstadoRT> cambioEstado)
+        {
+            cambioDeEstadoRT = cambioEstado;
+        }
+        public void setTipoRT(TipoRT tipo)
+        {
+            tipoRT = tipo;
+        }
+        public void setModelo(Modelo modelo)
+        {
+            this.modelo = modelo;
+        }
+
         public bool esTipoRTSeleccionado(List<TipoRT> tipo)
         {
             for (int i = 0; i < tipo.Count; i++)

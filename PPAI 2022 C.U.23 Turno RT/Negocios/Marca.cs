@@ -9,7 +9,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
     class Marca
     {
         private String nombre { get; set; }
-
+        public void setNombre(string str)
+        {
+            nombre = str;
+        }
         public string getNombre()
         {
             return nombre;

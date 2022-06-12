@@ -14,6 +14,27 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private DateTime fechaHoraFin { get; set; }
         private List<CambioDeEstadoTurno> cambioDeEstadoTurno { get; set; }
 
+        public void setDiaSemana(string str)
+        {
+            diaSemana = str;
+        }
+        public void setFechaGeneracion(DateTime fecha)
+        {
+            fechaGeneracion = fecha;
+        }
+        public void setFechaHoraInicio(DateTime fecha)
+        {
+            fechaHoraInicio = fecha;
+        }
+        public void setFechaHoraFin(DateTime fecha)
+        {
+            fechaHoraFin = fecha;
+        }
+        public void setCambioDeEstadoTurno(List<CambioDeEstadoTurno> cambioDeEstadoTurno)
+        {
+            this.cambioDeEstadoTurno = cambioDeEstadoTurno;
+        }
+
         public bool esPosteriorFechaActual(DateTime fechaActual)
         {
             if (fechaHoraInicio > fechaActual)

@@ -11,5 +11,19 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private String clave { get; set; }
         private String usuario { get; set; }
         private bool habilitado { get; set; } = false;
+
+        public void setClave(string str)
+        {
+            clave = str;
+        }
+        public void setUsuario(string str)
+        {
+            usuario = str;
+        }
+        public void setHabilitado(bool habilitado)
+        {
+            this.habilitado = habilitado;
+        }
+
     }
 }

@@ -12,6 +12,20 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         private DateTime fechaHoraHasta { get; set; }
         private Estado estado { get; set; }
 
+
+        public void setFechaHoraDesde(DateTime fecha)
+        {
+            fechaHoraDesde = fecha;
+        }
+        public void setFechaHoraHasta(DateTime fecha)
+        {
+            fechaHoraHasta = fecha;
+        }
+        public void setEstado(Estado estado)
+        {
+            this.estado = estado;
+        }
+
         public bool queEstadoActivo()
         {
             if (esActual())
