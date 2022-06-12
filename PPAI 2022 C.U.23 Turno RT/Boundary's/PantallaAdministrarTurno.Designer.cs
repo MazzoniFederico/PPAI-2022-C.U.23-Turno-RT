@@ -31,6 +31,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         {
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btn_Opcion_Registrar_Turno = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -50,12 +51,23 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 1;
             // 
+            // btn_Opcion_Registrar_Turno
+            // 
+            this.btn_Opcion_Registrar_Turno.Location = new System.Drawing.Point(477, 26);
+            this.btn_Opcion_Registrar_Turno.Name = "btn_Opcion_Registrar_Turno";
+            this.btn_Opcion_Registrar_Turno.Size = new System.Drawing.Size(232, 41);
+            this.btn_Opcion_Registrar_Turno.TabIndex = 2;
+            this.btn_Opcion_Registrar_Turno.Text = "Opcion Registrar turno";
+            this.btn_Opcion_Registrar_Turno.UseVisualStyleBackColor = true;
+            this.btn_Opcion_Registrar_Turno.Click += new System.EventHandler(this.btn_Opcion_Registrar_Turno_Click);
+            // 
             // PantallaAdministrarTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1036, 558);
+            this.Controls.Add(this.btn_Opcion_Registrar_Turno);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.MinimizeBox = false;
@@ -72,5 +84,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btn_Opcion_Registrar_Turno;
     }
 }

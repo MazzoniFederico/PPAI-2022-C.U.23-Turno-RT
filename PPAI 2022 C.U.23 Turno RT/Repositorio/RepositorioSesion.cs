@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
 {
-    class RepositorioSesion
+    public class RepositorioSesion
     {
         public void getSesiones()
         {
@@ -38,7 +38,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
             foreach (DataRow resultado in res.Rows)
             {
                 sesion.setHoraFechaInicio(DateTime.Parse(resultado["horaFechaInicio"].ToString()));
+                if (resultado["HoraFechaFin"].ToString() != "") { 
                 sesion.setHoraFechaFin(DateTime.Parse(resultado["HoraFechaFin"].ToString()));
+                }
 
                 usuario.setClave(resultado["clave"].ToString());
                 usuario.setUsuario(resultado["usuario"].ToString());

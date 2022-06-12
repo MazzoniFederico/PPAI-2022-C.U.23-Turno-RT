@@ -103,7 +103,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
                 }
             }
 
-            return "Baja Definitiva";
+            return "Baja";
         }
 
         public bool esRecursoSeleccionado(string RT)

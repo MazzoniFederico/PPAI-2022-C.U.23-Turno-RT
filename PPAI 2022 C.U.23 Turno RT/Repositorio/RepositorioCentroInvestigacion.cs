@@ -13,7 +13,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
         public void GetCentroDeInvestigaciones()
         {
             BaseDatos bd = new BaseDatos();
-            string consulta = "SELECT * FROM CENTRODEINVESTIGACION";
+            string consulta = "SELECT * FROM CENTRO_INVESTIGACION";
             List<CentroDeInvestigacion> centroDeInvestigaciones = new List<CentroDeInvestigacion>();
             CentroDeInvestigacion centroDeInvestigacion = new CentroDeInvestigacion();
 
@@ -29,20 +29,20 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                 centroDeInvestigacion.setTelefonoContacto(resultado["telefonoContacto"].ToString());
                 centroDeInvestigacion.setCorreoElectronico(resultado["correoElectronico"].ToString());
                 centroDeInvestigacion.setNumeroResolucionCreacion(Int32.Parse(resultado["numeroResolucionCreacion"].ToString()));
-                centroDeInvestigacion.setFechaResolucionCreacion(DateTime.Parse(resultado["fechaResolucionCreacion"].ToString()));
+                //centroDeInvestigacion.setFechaResolucionCreacion(DateTime.Parse(resultado["fechaResolucionCreacion"].ToString()));
                 centroDeInvestigacion.setReglamento(resultado["reglamento"].ToString());
                 centroDeInvestigacion.setCaracteristicasGenerales(resultado["caracteristicasGenerales"].ToString());
                 centroDeInvestigacion.setFechaAlta(DateTime.Parse(resultado["fechaAlta"].ToString()));
                 centroDeInvestigacion.setTiempoAntelacionReserva(resultado["tiempoAntelacionReserva"].ToString());
-                if (resultado["fechaBaja"].ToString() != null)
+                if (resultado["fechaBaja"].ToString() != "")
                 {
                     centroDeInvestigacion.setFechaBaja(DateTime.Parse(resultado["fechaBaja"].ToString()));
                     centroDeInvestigacion.setMotivoBaja(resultado["motivoBaja"].ToString());
                 }
-                string consulta2 = "SELECT * FROM RECURSOTECNOLOGICO WHERE nombreCentro = " + centroDeInvestigacion.getNombre();
-                DataTable resRT = bd.consulta(consulta);
+                string consulta2 = "SELECT * FROM RECURSO_TECNOLOGICO JOIN RT_X_CI x ON numeroRT = x.idRT JOIN CENTRO_INVESTIGACION ci ON  x.idCI = ci.id WHERE ci.nombreCentro = '" + centroDeInvestigacion.getNombre() + "'";
+                DataTable resRT = bd.consulta(consulta2);
                 RecursoTecnologico recursoTecnologico = new RecursoTecnologico();
-                List<RecursoTecnologico> recursoTecnologicos = null;
+                List<RecursoTecnologico> recursoTecnologicos = new List<RecursoTecnologico>();
 
                 foreach (DataRow res in resRT.Rows)
                 {
@@ -55,11 +55,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
 
                     recursoTecnologicos.Add(recursoTecnologico);
 
-                    string consulta8 = "SELECT * FROM TURNO WHERE numero_RT = " + recursoTecnologico.getNumeroRT().ToString();
+                    string consulta8 = "SELECT * FROM TURNO t JOIN TURNOS_X_RT x ON t.id = x.idTurno WHERE x.idRT = " + recursoTecnologico.getNumeroRT().ToString();
                     DataTable resTurno = bd.consulta(consulta8);
 
                     Turno turno = new Turno();
-                    List<Turno> listaTurnos = null;
+                    List<Turno> listaTurnos = new List<Turno>();
                     foreach (DataRow respuesta in resTurno.Rows)
                     {
 
@@ -70,7 +70,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
 
                         listaTurnos.Add(turno);
 
-                        string consulta4 = "SELECT * FROM CAMBIOESTADOTURNO INNER JOIN ESTADO e ON id = e.id_Cambio_Estado WHERE fechaHoraInicio_Turno = " + turno.getFechaHoraInicio();
+                        string consulta4 = "SELECT * FROM CAMBIO_ESTADO_TURNO ce INNER JOIN ESTADO e ON ce.idEstado = e.id JOIN CAMBIO_ESTADOS_X_TURNO x ON ce.id = x.idCambioEstadoT JOIN TURNO t ON x.idTurno = t.id WHERE t.fechaHoraInicio = '" + turno.getFechaHoraInicio() + "'";
                         DataTable resEstado = bd.consulta(consulta4);
 
                         Estado estado = new Estado();
@@ -94,7 +94,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                         turno.setCambioDeEstadoTurno(cambioDeEstadoTurnos);
 
                     }
-                    string consulta7 = "SELECT * FROM TIPORT WHERE numeroRT= " + recursoTecnologico.getNumeroRT();
+                    string consulta7 = "SELECT * FROM TIPO_RT t  JOIN RECURSO_TECNOLOGICO rt ON rt.idTipoRT = t.id WHERE rt.numeroRT = " + recursoTecnologico.getNumeroRT();
                     DataTable resTipoRT = bd.consulta(consulta7);
                     TipoRT tipoRT = new TipoRT();
                     foreach (DataRow resTipo in resTipoRT.Rows)
@@ -104,7 +104,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                     }
                     recursoTecnologico.setTipoRT(tipoRT);
 
-                    string consulta6 = "SELECT * FROM MODELO INNER JOIN MARCA m ON idMarca = m.id WHERE numeroRT= " + recursoTecnologico.getNumeroRT();
+                    string consulta6 = "SELECT * FROM MODELO mo JOIN MODELOS_X_MARCA x ON x.idModelo = mo.id JOIN MARCA m ON x.idMarca = m.id JOIN RECURSO_TECNOLOGICO rt ON rt.idModelo = mo.id WHERE rt.numeroRT = " + recursoTecnologico.getNumeroRT();
                     DataTable resMarcas = bd.consulta(consulta6);
                     Modelo modelo = new Modelo();
                     Marca marca = new Marca();
@@ -118,18 +118,21 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
 
                     recursoTecnologico.setModelo(modelo);
 
-                    string consulta5 = "SELECT * FROM CAMBIOESTADORT INNER JOIN ESTADO e ON id = e.id_Cambio_Estado WHERE numeroRT = " + recursoTecnologico.getNumeroRT();
+                    string consulta5 = "SELECT * FROM CAMBIO_ESTADO_RT ce INNER JOIN ESTADO e ON e.id = ce.idEstado JOIN CAMBIO_ESTADOS_X_RT x ON x.idCambioEstadoRT = ce.id  WHERE x.idRT = " + recursoTecnologico.getNumeroRT();
                     DataTable resEstadoRT = bd.consulta(consulta5);
                     Estado estadoRT = new Estado();
                     CambioDeEstadoRT cambioDeEstadoRT = new CambioDeEstadoRT();
-                    List<CambioDeEstadoRT> cambioDeEstadoRTs = null;
+                    List<CambioDeEstadoRT> cambioDeEstadoRTs = new List<CambioDeEstadoRT>();
                     foreach (DataRow resERT in resEstadoRT.Rows)
                     {
-                        estadoRT.setNombre(resERT["nombreEstado"].ToString());
+                        estadoRT.setNombre(resERT["nombre"].ToString());
                         estadoRT.setDescripcion(resERT["descripcion"].ToString());
                         estadoRT.setAmbito(resERT["ambito"].ToString());
 
-                        cambioDeEstadoRT.setFechaHoraHasta(DateTime.Parse(resERT["fechaHoraHasta"].ToString()));
+                        if (resERT["fechaHoraHasta"].ToString() != "")
+                        {
+                            cambioDeEstadoRT.setFechaHoraHasta(DateTime.Parse(resERT["fechaHoraHasta"].ToString()));
+                        }
                         cambioDeEstadoRT.setFechaHoraDesde(DateTime.Parse(resERT["fechaHoraDesde"].ToString()));
 
                         cambioDeEstadoRT.setEstado(estadoRT);
@@ -140,12 +143,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                     recursoTecnologico.setTurno(listaTurnos);
                 }
 
-                string consulta3 = "SELECT * FROM ASIGNACIONCIENTIFICODELCI INNER JOIN PERSONALCIENTIFICO pc ON id = pcIdAsignacion INNER JOIN USUARIO u ON pc.numeroUsuario = u.usuario WHERE nombreCI = " + centroDeInvestigacion.getNombre();
+                string consulta3 = "SELECT * FROM ASIGNACION_CIENTIFICO_CI a INNER JOIN PERSONAL_CIENTIFICO pc ON a.idCientifico = pc.legajo INNER JOIN USUARIO u ON pc.legajo = u.legajoPersonal JOIN ASIGNACIONES_X_CI x ON x.idAsignacion = a.id JOIN CENTRO_INVESTIGACION ci ON ci.id = x.idCI WHERE ci.nombreCentro = '" + centroDeInvestigacion.getNombre() + "'";
                 DataTable resPersonal = bd.consulta(consulta3);
                 AsignacionCientificoCI asignacionCientificoCI = new AsignacionCientificoCI();
                 PersonalCientifico personalCientifico = new PersonalCientifico();
                 Usuario usuario = new Usuario();
-                List<AsignacionCientificoCI> asignacionCientificoCIs = null;
+                List<AsignacionCientificoCI> asignacionCientificoCIs = new List<AsignacionCientificoCI>();
                 foreach (DataRow resP in resPersonal.Rows)
                 {
 
@@ -153,12 +156,15 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                     personalCientifico.setNombre(resP["nombre"].ToString());
                     personalCientifico.setApellido(resP["apellido"].ToString());
                     personalCientifico.setNumeroDocumento(Int32.Parse(resP["dni"].ToString()));
-                    personalCientifico.setCorreoElectronicoInstitucional(resP["correoIntitucional"].ToString());
+                    personalCientifico.setCorreoElectronicoInstitucional(resP["correoInstitucional"].ToString());
                     personalCientifico.setCorreoElectronicoPersonal(resP["correoPersonal"].ToString());
                     personalCientifico.setTelefonoCelular(resP["telefonoCelular"].ToString());
 
                     asignacionCientificoCI.setFechaDesde(DateTime.Parse(resP["fechaDesde"].ToString()));
-                    asignacionCientificoCI.setFechaHasta(DateTime.Parse(resP["fechaHasta"].ToString()));
+                    if (resP["fechaHasta"].ToString() != "")
+                    {
+                        asignacionCientificoCI.setFechaHasta(DateTime.Parse(resP["fechaHasta"].ToString()));
+                    }
 
                     asignacionCientificoCI.setPersonalCientifico(personalCientifico);
 

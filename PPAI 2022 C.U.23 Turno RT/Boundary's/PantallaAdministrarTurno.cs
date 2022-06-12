@@ -18,11 +18,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
     {
         private GestorTurnoRT gestor;
         private Sesion sesion;
-        public PantallaAdministrarTurno(GestorTurnoRT gestorTurno, RepositorioSesion repositorioSesion)
+        public PantallaAdministrarTurno(GestorTurnoRT gestorTurno)//, RepositorioSesion repositorioSesion)
         {
             InitializeComponent();
             this.gestor = gestorTurno;
-            this.sesion = repositorioSesion.getSesionActual();
+            //this.sesion = repositorioSesion.getSesionActual();
         }
 
         public void opcionReservarTurno()
@@ -76,6 +76,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         public void solicitarConfirmacion()
         {
             gestor.tomarConfirmacionReserva(this, "");
+        }
+
+        private void btn_Opcion_Registrar_Turno_Click(object sender, EventArgs e)
+        {
+            opcionReservarTurno();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
         public static List<TipoRT> GetTipoRTs()
         {
             BaseDatos bd = new BaseDatos();
-            string consulta = "SELECT * FROM TipoRT";
+            string consulta = "SELECT * FROM TIPO_RT";
             List<TipoRT> tipos = new List<TipoRT>();
             
             foreach (DataRow i in bd.consulta(consulta).Rows)

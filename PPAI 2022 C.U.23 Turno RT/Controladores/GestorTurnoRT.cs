@@ -32,7 +32,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
 
         public void opcionReservarTurno(PantallaAdministrarTurno pantallaAdministrarTurno, Sesion sesion)
         {
-            //this.sesion = sesion;
+            RepositorioCentroInvestigacion repoC = new RepositorioCentroInvestigacion();
+            repoC.GetCentroDeInvestigaciones();
+            this.sesion = sesion;
             tipoRTs = buscarTipoRT();
             pantallaAdministrarTurno.mostrarTipoRT(tipoRTs);
             buscarRTPorTipo();
@@ -71,7 +73,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         public void tomarSeleccionRT(string seleccionRT, string seleccionCentro, PantallaAdministrarTurno pantallaAdministrarTurno)
         {
             centroSeleccionado(seleccionCentro, seleccionRT);
-            if (verificarCentroInvestigacion(sesion.GetUsuario()))
+            if (verificarCentroInvestigacion())
             {
                 buscarEmailInstitucional(sesion.GetUsuario());
                 pantallaAdministrarTurno.mostrarTurnos(buscarTurnoPosteriorFechaActual());
@@ -79,8 +81,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             }
         }
 
-        public bool verificarCentroInvestigacion(Usuario usuario)
+        public bool verificarCentroInvestigacion()
         {
+             Usuario usuario = sesion.GetUsuario();
              return seleccionadoCentro.esCientificoMiCentro(usuario);   
         }
 

@@ -17,7 +17,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
 
         private void conectar()
         {
-            conexion.ConnectionString = "Data Source=DESKTOP-1AC1E0M;Initial Catalog=museo;Integrated Security=True";
+            conexion.ConnectionString = "Data Source=DESKTOP-1AC1E0M;Initial Catalog=GestionRT;Integrated Security=True";
             conexion.Open();
             cmd.Connection = conexion;
             cmd.CommandType = System.Data.CommandType.Text;
