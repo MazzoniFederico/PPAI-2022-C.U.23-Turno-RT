@@ -92,6 +92,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
             DataTable resRecursos = bd.consulta(consulta2);
 
             RecursoTecnologico recursoTecnologico = new RecursoTecnologico();
+            List<RecursoTecnologico> listaRecursos = null;
             foreach (DataRow respuesta in resRecursos.Rows)
             {
                 recursoTecnologico.setNumeroRT(Int32.Parse(respuesta["numeroRT"].ToString()));
@@ -101,29 +102,73 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                 recursoTecnologico.setDuracionMantenimientoPreventivo(respuesta["duracionMantenimientoPreventivo"].ToString());
                 recursoTecnologico.setFraccionHorarioTurnos(respuesta["fraccionHorarioTurnos"].ToString());
 
-                centroDeInvestigacion.setRecursoTecnologico(recursoTecnologico);
+                listaRecursos.Add(recursoTecnologico);
+
             }
+            centroDeInvestigacion.setRecursoTecnologico(listaRecursos);
 
 
             string consulta3 = "SELECT * FROM TURNO WHERE numero_RT = " + recursoTecnologico.getNumeroRT().ToString();
             DataTable resTurno = bd.consulta(consulta3);
 
             Turno turno = new Turno();
+            List<Turno> listaTurnos = null;
             foreach (DataRow respuesta in resTurno.Rows)
             {
+
                 turno.setFechaGeneracion(DateTime.Parse(respuesta["fechaGeneracion"].ToString()));
                 turno.setDiaSemana(respuesta["diaSemana"].ToString());
                 turno.setFechaHoraInicio(DateTime.Parse(respuesta["fechaHoraInicio"].ToString()));
                 turno.setFechaHoraFin(DateTime.Parse(respuesta["fechaHoraFin"].ToString()));
 
-                recursoTecnologico.SetTurno(turno);
+                listaTurnos.Add(turno);
             }
+            recursoTecnologico.SetTurno(listaTurnos);
 
-            string consulta4 = "SELECT * FROM CAMBIOESTADOTURNO INNER JOIN ESTADO e ON id = e.id_Cambio_Estado WHERE fechaHoraInicio_Turno = " + turno.getFechaHoraInicio() );
+            string consulta4 = "SELECT * FROM CAMBIOESTADOTURNO INNER JOIN ESTADO e ON id = e.id_Cambio_Estado WHERE fechaHoraInicio_Turno = " + turno.getFechaHoraInicio();
             DataTable resEstado = bd.consulta(consulta4);
 
             Estado estado = new Estado();
             CambioDeEstadoTurno cambioDeEstadoTurno = new CambioDeEstadoTurno();
+            List<CambioDeEstadoTurno> cambioDeEstadoTurnos = null;
+            foreach (DataRow respuesta in resEstado.Rows)
+            {
+                estado.setNombre(respuesta["nombreEstado"].ToString());
+                estado.setDescripcion(respuesta["descripcion"].ToString());
+                estado.setAmbito(respuesta["ambito"].ToString());
+
+                cambioDeEstadoTurno.setFechaHoraHasta(DateTime.Parse(respuesta["fechaHoraHasta"].ToString()));
+                cambioDeEstadoTurno.setFechaHoraDesde(DateTime.Parse(respuesta["fechaHoraDesde"].ToString()));
+
+                cambioDeEstadoTurno.setEstado(estado);
+
+                cambioDeEstadoTurnos.Add(cambioDeEstadoTurno);
+            }
+
+            turno.setCambioEstadoTurno(cambioDeEstadoTurnos);
+
+            string consulta5 = "SELECT * FROM CAMBIOESTADORT INNER JOIN ESTADO e ON id = e.id_Cambio_Estado WHERE numeroRT = " + recursoTecnologico.getNumeroRT();
+            DataTable resEstadoRT = bd.consulta(consulta5);
+
+            CambioDeEstadoRT cambioDeEstadoRT = new CambioDeEstadoRT();
+            List<CambioDeEstadoRT> cambioDeEstadoRTs = null;
+            foreach (DataRow respuesta in resEstadoRT.Rows)
+            {
+                estado.setNombre(respuesta["nombreEstado"].ToString());
+                estado.setDescripcion(respuesta["descripcion"].ToString());
+                estado.setAmbito(respuesta["ambito"].ToString());
+
+                cambioDeEstadoRT.setFechaHoraHasta(DateTime.Parse(respuesta["fechaHoraHasta"].ToString()));
+                cambioDeEstadoRT.setFechaHoraDesde(DateTime.Parse(respuesta["fechaHoraDesde"].ToString()));
+
+                cambioDeEstadoRT.setEstado(estado);
+
+                cambioDeEstadoRTs.Add(cambioDeEstadoRT);
+            }
+
+            recursoTecnologico.setCambioEstadoRT(cambioDeEstadoRTs);
+
+           
         }
     }
 }

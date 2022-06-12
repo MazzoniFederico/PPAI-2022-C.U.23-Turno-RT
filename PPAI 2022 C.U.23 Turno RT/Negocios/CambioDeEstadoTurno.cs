@@ -16,6 +16,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         {
 
         }
+
+        public void setFechaHoraHasta(DateTime fecha)
+        {
+            fechaHoraHasta = fecha;
+        }
         public CambioDeEstadoTurno(Estado nuevoEstado, DateTime desde)
         {
             estado = nuevoEstado;
