@@ -29,11 +29,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
         public bool estasDadoDeBaja()
         {
-            if (nombre != "baja")
+            if (nombre != "Baja definitiva")
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
 
         public string getNombre()

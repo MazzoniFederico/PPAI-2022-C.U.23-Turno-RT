@@ -47,7 +47,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
         public bool esActual()
         {
-            if (fechaHoraHasta == null)
+            if (fechaHoraHasta.ToString() == "1/1/0001 00:00:00")
             {
                 return true;
             }

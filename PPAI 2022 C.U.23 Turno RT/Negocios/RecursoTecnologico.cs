@@ -60,18 +60,18 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             this.modelo = modelo;
         }
 
-        public bool esTipoRTSeleccionado(List<TipoRT> tipo)
+        public bool esTipoRTSeleccionado(TipoRT tipo)
         {
-            for (int i = 0; i < tipo.Count; i++)
+            if(tipo.getNombre() == tipoRT.getNombre())
             {
-                if(tipo[i] == tipoRT)
+                for (int j = 0; j < cambioDeEstadoRT.Count; j++)
                 {
-                    for (int j = 0; j < cambioDeEstadoRT.Count; j++)
+                    if(cambioDeEstadoRT[j].queEstadoActivo())
                     {
-                        cambioDeEstadoRT[j].queEstadoActivo();
+                        return true;
                     }
-                    
                 }
+                    
             }
             return false;
         }
@@ -86,7 +86,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             string modeloYMarca = "";
 
             modeloYMarca += modelo.getNombre();
-            modeloYMarca += " " + modelo.getNombreMarca();
+            modeloYMarca += "- " + modelo.getNombreMarca();
 
             return modeloYMarca;
         }

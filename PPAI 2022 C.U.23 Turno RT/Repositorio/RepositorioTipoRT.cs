@@ -19,8 +19,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
             foreach (DataRow i in bd.consulta(consulta).Rows)
             {
                 TipoRT tipo = new TipoRT();
-                tipo.setNombre(i[0].ToString());
-                tipo.setDescripcion(i[1].ToString());
+                tipo.setNombre(i[1].ToString());
+                tipo.setDescripcion(i[2].ToString());
                 tipos.Add(tipo);
             }
             return tipos;

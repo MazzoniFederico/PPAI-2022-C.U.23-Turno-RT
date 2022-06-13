@@ -16,9 +16,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         private Estado estadoReservado;
         private InterfazNotificadorEmail interfazNotificadorEmail;
         private List<TipoRT> tipoRTs;
-        private List<TipoRT> tipoRTSeleccionada;
+        private TipoRT tipoRTSeleccionada;
         private List<CentroDeInvestigacion> centroDeInvestigacion;
-        private List<string> recursoTecnologico;
+        private List<string> recursoTecnologico = new List<string>();
         private string seleccionadoRecursoTecnologico;
         private CentroDeInvestigacion seleccionadoCentro;
         private string direccionEmail;
@@ -33,41 +33,45 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         public void opcionReservarTurno(PantallaAdministrarTurno pantallaAdministrarTurno, Sesion sesion)
         {
             RepositorioCentroInvestigacion repoC = new RepositorioCentroInvestigacion();
-            repoC.GetCentroDeInvestigaciones();
+            centroDeInvestigacion = repoC.GetCentroDeInvestigaciones();
             this.sesion = sesion;
             tipoRTs = buscarTipoRT();
             pantallaAdministrarTurno.mostrarTipoRT(tipoRTs);
-            buscarRTPorTipo();
-            pantallaAdministrarTurno.mostrarDatosRT(recursoTecnologico);
-            pantallaAdministrarTurno.solicitarSeleccionRT();
-            
-            
+            pantallaAdministrarTurno.solicitarSeleccionTipoRT();
         }
-
         public List<TipoRT> buscarTipoRT()
         {
             return RepositorioTipoRT.GetTipoRTs();
         }
 
-        public void tomarTipoRT(List<TipoRT> tipoRT)
+        public void tomarTipoRT(string tipoSelec, PantallaAdministrarTurno pantallaAdministrarTurno)
         {
-            this.tipoRTSeleccionada = tipoRT;
+            foreach (TipoRT t in tipoRTs)
+            {
+                if(t.getNombre() + " "  == tipoSelec)
+                {
+                    tipoRTSeleccionada = t;
+                }
+            }
+            buscarRTPorTipo();
+            pantallaAdministrarTurno.mostrarDatosRT(recursoTecnologico);
+            pantallaAdministrarTurno.solicitarSeleccionRT();
         }
 
         public void buscarRTPorTipo()
         {
-          
-            List<string> recursosCentro;
-            List<CentroDeInvestigacion> centro = null ;
+            List<string> recursosCentro = new List<string>();
+            //List<string> recursoXCentro = new List<string>();
             for (var i = 0; i < centroDeInvestigacion.Count; i++)
             {
-                centro.Add(centroDeInvestigacion[i]);
+                //centro.Add(centroDeInvestigacion[i]);
                 recursosCentro = centroDeInvestigacion[i].buscarRTPorTipo(tipoRTSeleccionada);
                 for (int j = 0; j < recursosCentro.Count; j++)
                 {
                     recursoTecnologico.Add(recursosCentro[j]);
                 }
             }
+            var a = recursosCentro;
         }
 
         public void tomarSeleccionRT(string seleccionRT, string seleccionCentro, PantallaAdministrarTurno pantallaAdministrarTurno)

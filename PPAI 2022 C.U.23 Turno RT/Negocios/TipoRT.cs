@@ -21,5 +21,19 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         {
             descripcion = des;
         }
+
+        public string getNombre()
+        {
+            return nombre;
+        }
+
+        public string toString()
+        {
+            string respuesta = "";
+            respuesta += nombre;
+            respuesta += " - " + descripcion;
+
+            return respuesta;
+        }
     }
 }

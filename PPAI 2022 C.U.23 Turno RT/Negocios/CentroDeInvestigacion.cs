@@ -106,30 +106,36 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
 
 
-        public List<string> buscarRTPorTipo(List<TipoRT> tipoRT)
+        public List<string> buscarRTPorTipo(TipoRT tipoRT)
         {
-            List<RecursoTecnologico> recurso = null;
-            List<string> datosRercurso = null;
+            //int numRec = new int();
+            List<RecursoTecnologico> recurso = new List<RecursoTecnologico>();
+            var datosRercurso = new List<string>();
             for (int i = 0; i < recursoTecnologico.Count; i++)
             {
                 if (recursoTecnologico[i].esTipoRTSeleccionado(tipoRT))
                 {
                     recurso.Add(recursoTecnologico[i]);
+                    //numRec += 1;
                 }
             }
 
+            //datosRercurso.Clear();
             foreach (var i in recurso)
             {
                 string var = "";
                 var += this.nombre;
-                var += " " + i.getNumeroRT().ToString();
-                var += " " + i.miModeloYMarca();
-                var += " " + i.getEstado();
+                var += "- " + i.getNumeroRT().ToString();
+                var += "- " + i.miModeloYMarca();
+                var += "- " + i.getEstado();
                 datosRercurso.Add(var);
+                //numRec = i.getNumeroRT();
+                
             }
             return datosRercurso;
             
         }
+
        
         public string getNombre()
         {
