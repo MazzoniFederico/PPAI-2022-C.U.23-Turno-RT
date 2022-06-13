@@ -27,10 +27,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
             }*/
         }
 
-        public void getSesionActual()
+        public Sesion getSesionActual()
         {
             BaseDatos bd = new BaseDatos();
-            string consulta = "SELECT * FROM SESION INNER JOIN USUARIO u ON usuario=u.id WHERE fechaFin is NULL";
+            string consulta = "SELECT * FROM SESION s INNER JOIN USUARIO u ON s.idUsuario = u.id WHERE horaFechaFin is NULL";
             DataTable res = bd.consulta(consulta);
             Sesion sesion = new Sesion();
             Usuario usuario = new Usuario();
@@ -42,11 +42,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                 sesion.setHoraFechaFin(DateTime.Parse(resultado["HoraFechaFin"].ToString()));
                 }
 
-                usuario.setClave(resultado["clave"].ToString());
+                usuario.setClave(resultado["contraseña"].ToString());
                 usuario.setUsuario(resultado["usuario"].ToString());
 
                 sesion.setUsuarioEnSesion(usuario);;
-            }    
+            }
+
+            return sesion;
         }
     }
 }

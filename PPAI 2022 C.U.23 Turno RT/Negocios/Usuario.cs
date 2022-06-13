@@ -25,5 +25,21 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             this.habilitado = habilitado;
         }
 
+        public string getUsuario()
+        {
+            return usuario;
+        }
+
+        public bool esUsuarioLog(Usuario user)
+        {
+            if(usuario == user.getUsuario())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

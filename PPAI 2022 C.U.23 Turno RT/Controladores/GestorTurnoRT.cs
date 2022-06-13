@@ -55,7 +55,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             }
             buscarRTPorTipo();
             pantallaAdministrarTurno.mostrarDatosRT(recursoTecnologico);
-            //pantallaAdministrarTurno.solicitarSeleccionRT();
+            pantallaAdministrarTurno.solicitarSeleccionRT();
         }
 
         public void buscarRTPorTipo()
@@ -76,10 +76,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
 
         public void tomarSeleccionRT(string seleccionRT, string seleccionCentro, PantallaAdministrarTurno pantallaAdministrarTurno)
         {
-            centroSeleccionado(seleccionCentro, seleccionRT);
+            seleccionadoRecursoTecnologico = seleccionRT;
+            centroSeleccionado(seleccionCentro);
             if (verificarCentroInvestigacion())
             {
-                buscarEmailInstitucional(sesion.GetUsuario());
+                buscarEmailInstitucional(sesion.getUsuario());
                 pantallaAdministrarTurno.mostrarTurnos(buscarTurnoPosteriorFechaActual());
                 pantallaAdministrarTurno.solicitarSeleccionTurno();
             }
@@ -87,7 +88,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
 
         public bool verificarCentroInvestigacion()
         {
-             Usuario usuario = sesion.GetUsuario();
+             Usuario usuario = sesion.getUsuario();
              return seleccionadoCentro.esCientificoMiCentro(usuario);   
         }
 
@@ -96,7 +97,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
              direccionEmail = seleccionadoCentro.buscarEmailCientifico(usuario);         
         }
 
-        public void centroSeleccionado(string seleccionado, string seleccionRT)
+        public void centroSeleccionado(string seleccionado)
         {
             foreach (var centro in centroDeInvestigacion)
             {

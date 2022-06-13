@@ -51,19 +51,20 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         }
 
 
-        //Deberia ser SESION
+        public string getEmailInstitucional()
+        {
+            return correoElectronicoInstitucional;
+        }
+
+
         public bool validarUsuarioLogeado(Usuario usuario)
         {
-            if (this.usuario == usuario)
+            if (this.usuario.esUsuarioLog(usuario) )
             {
                 return true;
             }
             return false;
         }
 
-        public string getEmailInstitucional()
-        {
-            return correoElectronicoInstitucional;
-        }
     }
 }

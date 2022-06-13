@@ -1,5 +1,6 @@
 ﻿using PPAI_2022_C.U._23_Turno_RT.Boundary_s;
 using PPAI_2022_C.U._23_Turno_RT.Controladores;
+using PPAI_2022_C.U._23_Turno_RT.Negocios;
 using PPAI_2022_C.U._23_Turno_RT.Repositorio;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace PPAI_2022_C.U._23_Turno_RT
             RepositorioCentroInvestigacion repo = new RepositorioCentroInvestigacion();
             InterfazNotificadorEmail interfazNotificadorEmail = new InterfazNotificadorEmail();
             GestorTurnoRT gestor = new GestorTurnoRT(interfazNotificadorEmail);
-            Application.Run(new PantallaAdministrarTurno(gestor));
+            RepositorioSesion repsesion = new RepositorioSesion();
+            Application.Run(new PantallaAdministrarTurno(gestor, repsesion));
         }
     }
 }

@@ -18,11 +18,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
     {
         private GestorTurnoRT gestor;
         private Sesion sesion;
-        public PantallaAdministrarTurno(GestorTurnoRT gestorTurno)//, RepositorioSesion repositorioSesion)
+        public PantallaAdministrarTurno(GestorTurnoRT gestorTurno, RepositorioSesion repSesion)
         {
             InitializeComponent();
             this.gestor = gestorTurno;
-            //this.sesion = repositorioSesion.getSesionActual();
+            this.sesion = repSesion.getSesionActual();
         }
 
         public void opcionReservarTurno()
@@ -96,10 +96,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                 }
 
                 gridRT.Rows.Add();
-                gridRT.Rows[i].Cells[0].Value = datos[1];
-                gridRT.Rows[i].Cells[1].Value = datos[2];
-                gridRT.Rows[i].Cells[2].Value = datos[3];
-                gridRT.Rows[i].Cells[3].Value = datos[4];
+                gridRT.Rows[i].Cells[0].Value = datos[0];
+                gridRT.Rows[i].Cells[1].Value = datos[1];
+                gridRT.Rows[i].Cells[2].Value = datos[2];
+                gridRT.Rows[i].Cells[3].Value = datos[3];
+                gridRT.Rows[i].Cells[4].Value = datos[4];
                 if (datos[4] == " Disponible")
                 {
                     gridRT.Rows[i].DefaultCellStyle.BackColor = Color.Blue;
@@ -115,10 +116,15 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             }
         }
 
-        public void solicitarSeleccionRT(List<string> datosRTPorCentro)
+        public void solicitarSeleccionRT()
         {
             
             //gestor.tomarSeleccionRT("seleccionCentro", "SeleccionRT", this);
+        }
+
+        public void tomarSeleccionRT()
+        {
+            gestor.tomarSeleccionRT(gridRT.SelectedRows.ToString(), CB_CentroInvestigacion.SelectedItem.ToString(), this);
         }
 
         public void mostrarTurnos(List<string> turnos)
@@ -168,6 +174,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                 if(gridRT.Rows[i].Cells[0].ToString() != CB_CentroInvestigacion.SelectedIndex.ToString())
                 {
                     gridRT.Rows[i].ReadOnly = true;
+                    //gridRT.Rows[i].Visible = false;
                 }
             }
 
@@ -175,7 +182,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         private void btn_seleccionarRT_Click(object sender, EventArgs e)
         {
-            
+            tomarSeleccionRT();
         }
     }
 }

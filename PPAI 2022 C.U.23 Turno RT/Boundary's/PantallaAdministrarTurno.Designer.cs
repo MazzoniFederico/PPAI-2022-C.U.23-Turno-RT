@@ -113,9 +113,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridRT.DefaultCellStyle = dataGridViewCellStyle1;
-            this.gridRT.Location = new System.Drawing.Point(314, 223);
+            this.gridRT.Location = new System.Drawing.Point(279, 227);
             this.gridRT.Name = "gridRT";
-            this.gridRT.Size = new System.Drawing.Size(441, 150);
+            this.gridRT.RowHeadersVisible = false;
+            this.gridRT.Size = new System.Drawing.Size(503, 150);
             this.gridRT.TabIndex = 5;
             this.gridRT.Visible = false;
             this.gridRT.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -133,7 +134,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             // 
             // Centro
             // 
-            this.Centro.HeaderText = "nombreCentro";
+            this.Centro.HeaderText = "Nombre Centro";
             this.Centro.Name = "Centro";
             // 
             // NombreRT
