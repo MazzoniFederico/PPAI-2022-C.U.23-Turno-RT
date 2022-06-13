@@ -29,13 +29,15 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_Centro = new System.Windows.Forms.Label();
             this.CB_CentroInvestigacion = new System.Windows.Forms.ComboBox();
             this.btn_Opcion_Registrar_Turno = new System.Windows.Forms.Button();
             this.CBTipoRT = new System.Windows.Forms.ComboBox();
             this.btn_tipoRT = new System.Windows.Forms.Button();
             this.gridRT = new System.Windows.Forms.DataGridView();
+            this.btn_seleccionarRT = new System.Windows.Forms.Button();
+            this.Centro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreRT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modeloRT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.marcaRT = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,24 +100,41 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.gridRT.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.gridRT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridRT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Centro,
             this.NombreRT,
             this.modeloRT,
             this.marcaRT,
             this.estadoRT});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridRT.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridRT.DefaultCellStyle = dataGridViewCellStyle1;
             this.gridRT.Location = new System.Drawing.Point(314, 223);
             this.gridRT.Name = "gridRT";
             this.gridRT.Size = new System.Drawing.Size(441, 150);
             this.gridRT.TabIndex = 5;
             this.gridRT.Visible = false;
             this.gridRT.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // btn_seleccionarRT
+            // 
+            this.btn_seleccionarRT.Location = new System.Drawing.Point(417, 392);
+            this.btn_seleccionarRT.Name = "btn_seleccionarRT";
+            this.btn_seleccionarRT.Size = new System.Drawing.Size(201, 23);
+            this.btn_seleccionarRT.TabIndex = 6;
+            this.btn_seleccionarRT.Text = "Seleccionar Recurso Tecnologico";
+            this.btn_seleccionarRT.UseVisualStyleBackColor = true;
+            this.btn_seleccionarRT.Visible = false;
+            this.btn_seleccionarRT.Click += new System.EventHandler(this.btn_seleccionarRT_Click);
+            // 
+            // Centro
+            // 
+            this.Centro.HeaderText = "nombreCentro";
+            this.Centro.Name = "Centro";
             // 
             // NombreRT
             // 
@@ -143,6 +162,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1036, 558);
+            this.Controls.Add(this.btn_seleccionarRT);
             this.Controls.Add(this.gridRT);
             this.Controls.Add(this.btn_tipoRT);
             this.Controls.Add(this.CBTipoRT);
@@ -168,6 +188,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         private System.Windows.Forms.ComboBox CBTipoRT;
         private System.Windows.Forms.Button btn_tipoRT;
         private System.Windows.Forms.DataGridView gridRT;
+        private System.Windows.Forms.Button btn_seleccionarRT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Centro;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreRT;
         private System.Windows.Forms.DataGridViewTextBoxColumn modeloRT;
         private System.Windows.Forms.DataGridViewTextBoxColumn marcaRT;

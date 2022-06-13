@@ -55,7 +55,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             }
             buscarRTPorTipo();
             pantallaAdministrarTurno.mostrarDatosRT(recursoTecnologico);
-            pantallaAdministrarTurno.solicitarSeleccionRT();
+            //pantallaAdministrarTurno.solicitarSeleccionRT();
         }
 
         public void buscarRTPorTipo()

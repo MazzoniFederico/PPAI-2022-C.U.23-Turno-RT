@@ -86,7 +86,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             for (int i = 0; i < datosRTPorCentro.Count(); i++)
             {
                 string[] datos = datosRTPorCentro[i].Split('-');
-                if (i > 0 && datos[0] != datosRTPorCentro[i].Split('-')[0])
+                if (i > 0 && datos[i-1] != datosRTPorCentro[i].Split('-')[0])
                 {
                     CB_CentroInvestigacion.Items.Add(datos[0]);
                 }
@@ -113,14 +113,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                     gridRT.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
                 }
             }
-
-
-
-            return;
         }
 
-        public void solicitarSeleccionRT()
+        public void solicitarSeleccionRT(List<string> datosRTPorCentro)
         {
+            
             //gestor.tomarSeleccionRT("seleccionCentro", "SeleccionRT", this);
         }
 
@@ -165,6 +162,20 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         private void CB_CentroInvestigacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             gridRT.Visible = true;
+            btn_seleccionarRT.Visible = true;
+            for (int i = 0; i < gridRT.Rows.Count; i++)
+            {
+                if(gridRT.Rows[i].Cells[0].ToString() != CB_CentroInvestigacion.SelectedIndex.ToString())
+                {
+                    gridRT.Rows[i].ReadOnly = true;
+                }
+            }
+
+        }
+
+        private void btn_seleccionarRT_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
