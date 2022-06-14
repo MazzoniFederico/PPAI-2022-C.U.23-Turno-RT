@@ -123,7 +123,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         public void solicitarSeleccionRT()
         {
-
             
         }
 
@@ -155,6 +154,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                 Grid_Calendario.Rows.Add();
                 Grid_Calendario.Rows[i].Cells[0].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[0];
                 Grid_Calendario.Rows[i].Cells[1].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[1];
+                Grid_Calendario.Rows[i].Cells[2].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[2];
             }
             for (int i = 0; i < turnos.Count; i++)
             {
@@ -239,7 +239,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         {
             lbl_datosTurno.Visible = true;
             string datosRT = "Hora inicio turno : " + Grid_Turnos.CurrentRow.Cells[1].Value.ToString();
-            datosRT += "\nHora inicio turno : " + Grid_Turnos.CurrentRow.Cells[2].Value.ToString();
+            datosRT += "\nHora Fin turno : " + Grid_Turnos.CurrentRow.Cells[2].Value.ToString();
 
             lbl_datosTurno.Text = datosRT;
         }
@@ -259,12 +259,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         public void solicitarConfirmacion()
         {
             btn_confirmarTurno.Visible = true;
-            //gestor.tomarConfirmacionReserva(this, "");
         }
 
         public void tomarConfirmacionReserva()
         {
-            gestor.tomarConfirmacionReserva(this, cb_modoNotificacion.SelectedItem.ToString());
+            string mensaje = lbl_datosRT.Text + "\n" + lbl_datosTurno.Text + "\n" + Grid_Calendario.CurrentRow.Cells[0].Value.ToString() + "/" + Grid_Calendario.CurrentRow.Cells[1].Value.ToString() + "/" + Grid_Calendario.CurrentRow.Cells[2].Value.ToString();
+            gestor.tomarConfirmacionReserva(this, cb_modoNotificacion.SelectedItem.ToString(), mensaje);
         }
 
         private void btn_Opcion_Registrar_Turno_Click(object sender, EventArgs e)

@@ -13,6 +13,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
     public class GestorTurnoRT
     {
         private Sesion sesion;
+        private string usuarioLogeado;
         private Estado estadoReservado;
         private List<Estado> estados;
         private InterfazNotificadorEmail interfazNotificadorEmail;
@@ -31,74 +32,109 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             this.interfazNotificadorEmail = interfazNotificadorEmail;
         }
 
+        //Empieza el CU
         public void opcionReservarTurno(PantallaAdministrarTurno pantallaAdministrarTurno, Sesion sesion)
         {
+            //Traemos los datos desde la Base de datos
+            //Centro de investigacion tiene todos los datos para los distintos centros
             RepositorioCentroInvestigacion repoC = new RepositorioCentroInvestigacion();
+            //Estado todos los estados posibles
             RepositorioEstado repEstado = new RepositorioEstado();
             estados = repEstado.getEstados();
             centroDeInvestigacion = repoC.GetCentroDeInvestigaciones();
+
+            //Asignamos la sesion logueada
             this.sesion = sesion;
+
+            //Buscamos todos los tipos de recursos
             tipoRTs = buscarTipoRT();
+            //Se muestra y solicita la seleccion de TipoRT
             pantallaAdministrarTurno.mostrarTipoRT(tipoRTs);
             pantallaAdministrarTurno.solicitarSeleccionTipoRT();
         }
         public List<TipoRT> buscarTipoRT()
         {
+            //Buscamos todos los tipos de recurso desde la BD
             return RepositorioTipoRT.GetTipoRTs();
         }
 
+        //Toma la eleccion o elecciones de tipo RT
         public void tomarTipoRT(string tipoSelec, PantallaAdministrarTurno pantallaAdministrarTurno)
         {
-            foreach (TipoRT t in tipoRTs)
-            {
-                if(t.getNombre() + " "  == tipoSelec)
-                {
-                    tipoRTSeleccionada = t;
-                }
-            }
+            //Se utilizaria una sobrecarga en caso de que se necesite cargar mas de un tipo, no es el camino del cu
+            setSeleccionadoTipoRT(tipoSelec);
+
+            //Busca los RT por el tipo seleccionado y que no sean Baja
             buscarRTPorTipo();
+
+            //Muestra los datos de los RT encontrados
             pantallaAdministrarTurno.mostrarDatosRT(recursoTecnologico);
             pantallaAdministrarTurno.solicitarSeleccionRT();
         }
 
+        public void setSeleccionadoTipoRT(string tipoSelec)
+        {
+            foreach (TipoRT t in tipoRTs)
+            {
+                if (t.getNombre() + " " == tipoSelec)
+                {
+                    tipoRTSeleccionada = t;
+                }
+            }
+        }
+
+        //Busca los RT por tipo seleccionado y que no sean baja
         public void buscarRTPorTipo()
         {
             List<string> recursosCentro = new List<string>();
-            //List<string> recursoXCentro = new List<string>();
+            //Mientras haya centro de investigacion
             for (var i = 0; i < centroDeInvestigacion.Count; i++)
             {
-                //centro.Add(centroDeInvestigacion[i]);
+                //valida == seleccionado y no sea baja por cada recurso
                 recursosCentro = centroDeInvestigacion[i].buscarRTPorTipo(tipoRTSeleccionada);
-                for (int j = 0; j < recursosCentro.Count; j++)
+                foreach (string rec in recursosCentro)
                 {
-                    recursoTecnologico.Add(recursosCentro[j]);
+                    //recorremos la lista de string para poder asignar los recursos de los distintos centros
+                    recursoTecnologico.Add(rec);
                 }
             }
-            var a = recursosCentro;
         }
 
+        //Toma la seleccion del Recurso tecnologico
         public void tomarSeleccionRT(string seleccionRT, string seleccionCentro, PantallaAdministrarTurno pantallaAdministrarTurno)
         {
+            //asigna el recurso (es un string)
             seleccionadoRecursoTecnologico = seleccionRT;
+
+            //verifica y asigna el centro seleccionado
             centroSeleccionado(seleccionCentro);
             if (verificarCentroInvestigacion())
             {
+                //obtiene el mail institucional para el usuario logeado
                 buscarEmailInstitucional(sesion.getUsuario());
+
+                //Busca y muestra los datos de los turnos para este RT
                 pantallaAdministrarTurno.mostrarTurnos(buscarTurnoPosteriorFechaActual());
                 pantallaAdministrarTurno.solicitarSeleccionTurno();
             }
             else
             {
+                //Si el cientifico no es de este centro es un caso alternativo
                 MessageBox.Show("El usuario no es de ese centro");
             }
         }
-
+        //Verifica que el cientifico sea del centro seleccionado con el user logeado
         public bool verificarCentroInvestigacion()
         {
+            //Busca el usuario logeado
              Usuario usuario = sesion.getUsuario();
+             usuarioLogeado = usuario.getUsuario();
+            //comparamos el usuario logeado con los usuarios de los cientificos del centro seleccionado
              return seleccionadoCentro.esCientificoMiCentro(usuario);   
         }
 
+        //Busca Email institucional para este camino del caso de uso
+        // (Podrian generarse otros metodos para devolver los otros modos de notificacion)
         public void buscarEmailInstitucional(Usuario usuario)
         { 
              direccionEmail = seleccionadoCentro.buscarEmailCientifico(usuario);         
@@ -106,6 +142,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
 
         public void centroSeleccionado(string seleccionado)
         {
+            //recorre la lista de centros y guarda el que fue seleccionado
             foreach (var centro in centroDeInvestigacion)
             {
                 if (centro.esCentroSeleccionado(seleccionado))
@@ -142,11 +179,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             pantallaAdministrarTurno.solicitarConfirmacion();
         }
 
-        public void tomarConfirmacionReserva(PantallaAdministrarTurno pantallaAdministrarTurno, string opcionNotificacion)
+        public void tomarConfirmacionReserva(PantallaAdministrarTurno pantallaAdministrarTurno, string opcionNotificacion, string confirmacion)
         {
             buscarEstadoReservado();
             actualizarEstadoTurnoReservado();
-            generarNotificacionEmail(opcionNotificacion);
+            generarNotificacionEmail(opcionNotificacion, confirmacion);
             finCU(pantallaAdministrarTurno);
         }
 
@@ -165,9 +202,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             turnoSeleccionado.actualizarEstadoTurnoReservado(fechaActual, estadoReservado);
         }
 
-        public void generarNotificacionEmail(string opcionNotificacion)
+        public void generarNotificacionEmail(string opcionNotificacion,string confirmacion)
         {
-            string mensaje = "Turno reservado en " + seleccionadoCentro.getNombre() + " " +  seleccionadoRecursoTecnologico + " " +  seleccionadoTurno;
+            string[] mensaje = confirmacion.Split('\n'); 
 
             if (opcionNotificacion != "Mensaje de texto")
             {

@@ -17,8 +17,18 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             InitializeComponent();
         }
 
-        public void enviarNotificacionEmail(string direccionEmail, string mensaje)
+        public void enviarNotificacionEmail(string direccionEmail, string[] confirm)
         {
+            string mensaje = "";
+            mensaje += "TURNO CONFIRMADO";
+            mensaje +=  "\n" + confirm[0];
+            mensaje +=  confirm[1];
+            mensaje +=  confirm[2];
+            mensaje += "\n" + confirm[3];
+            mensaje += "\n" + confirm[4];
+            mensaje += "\nFecha del turno: " + confirm[5];
+
+
             lbl_mail.Text = "Direccion Email: " + direccionEmail;
             lbl_Mensaje.Text = mensaje;
         }
