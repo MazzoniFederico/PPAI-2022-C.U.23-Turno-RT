@@ -14,6 +14,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
     {
         private Sesion sesion;
         private Estado estadoReservado;
+        private List<Estado> estados;
         private InterfazNotificadorEmail interfazNotificadorEmail;
         private List<TipoRT> tipoRTs;
         private TipoRT tipoRTSeleccionada;
@@ -33,6 +34,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         public void opcionReservarTurno(PantallaAdministrarTurno pantallaAdministrarTurno, Sesion sesion)
         {
             RepositorioCentroInvestigacion repoC = new RepositorioCentroInvestigacion();
+            RepositorioEstado repEstado = new RepositorioEstado();
+            estados = repEstado.getEstados();
             centroDeInvestigacion = repoC.GetCentroDeInvestigaciones();
             this.sesion = sesion;
             tipoRTs = buscarTipoRT();
@@ -84,6 +87,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
                 pantallaAdministrarTurno.mostrarTurnos(buscarTurnoPosteriorFechaActual());
                 pantallaAdministrarTurno.solicitarSeleccionTurno();
             }
+            else
+            {
+                MessageBox.Show("El usuario no es de ese centro");
+            }
         }
 
         public bool verificarCentroInvestigacion()
@@ -112,13 +119,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         {
             List<Turno> turnos = seleccionadoCentro.buscarTurnoPosteriorFechaActual(fechaActual, seleccionadoRecursoTecnologico);
             turnos.OrderBy(turno => turno.getFechaHoraInicio());
-            List<String> turnosPorDia = null;
+            List<String> turnosPorDia = new List<string>();
             for (int i = 0; i < turnos.Count; i++)
             {
-                turnosPorDia[i] = turnos[i].getFechaHoraInicio().ToString("dd-MM-yyyy");
-                turnosPorDia[i] += " " + turnos[i].cambioEstadoActual().getEstado().getNombre();
-                turnosPorDia[i] += " " + turnos[i].getFechaHoraInicio().ToString();
-                turnosPorDia[i] += " " + turnos[i].getFechaHoraFin().ToString();
+                turnosPorDia.Add("");
+                turnosPorDia[i] = turnos[i].getFechaHoraInicio().ToString();
+                turnosPorDia[i] += "-" + turnos[i].cambioEstadoActual().getEstado().getNombre();
+                turnosPorDia[i] += "-" + turnos[i].getFechaHoraFin().ToString();
+                turnosPorDia[i] += "-" + turnos[i].getID().ToString();
                 //a[i][4] = turnos[i].getDiaSemana();
             }
             return turnosPorDia;
@@ -126,7 +134,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
 
         public void tomarSeleccionTurno(string turno, PantallaAdministrarTurno pantallaAdministrarTurno)
         {
-            string opcionesNotificacion = "";
+            string opcionesNotificacion = "Email institucion-Email personal-Mensaje de texto";
             seleccionadoTurno = turno;
             pantallaAdministrarTurno.mostrarDatosRTSeleccionado(seleccionadoRecursoTecnologico);
             pantallaAdministrarTurno.mostrarDatosTurnoSeleccionado(seleccionadoTurno);
@@ -144,8 +152,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
 
         public void buscarEstadoReservado()
         {
-            Estado e = new Estado();
-            estadoReservado = e;
+            foreach (Estado estado in estados)
+            {
+                if (estado.getNombre() == "Reservado") ;
+                estadoReservado = estado;
+            }
         }
 
         public void actualizarEstadoTurnoReservado()
@@ -156,7 +167,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
 
         public void generarNotificacionEmail(string opcionNotificacion)
         {
-            interfazNotificadorEmail.enviarNotificacionEmail(opcionNotificacion, direccionEmail);
+            string mensaje = "Turno reservado en " + seleccionadoCentro.getNombre() + " " +  seleccionadoRecursoTecnologico + " " +  seleccionadoTurno;
+
+            if (opcionNotificacion != "Mensaje de texto")
+            {
+                interfazNotificadorEmail.enviarNotificacionEmail(direccionEmail, mensaje);
+            }
+            interfazNotificadorEmail.ShowDialog();
+            
         }
 
         public void finCU(PantallaAdministrarTurno pantallaAdministrarTurno)

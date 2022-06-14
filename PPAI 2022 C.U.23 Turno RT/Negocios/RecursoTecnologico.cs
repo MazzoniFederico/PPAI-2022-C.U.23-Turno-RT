@@ -108,7 +108,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
         public bool esRecursoSeleccionado(string RT)
         {
-            if(RT == numeroRT.ToString() + " " + miModeloYMarca())
+            if(RT == " " + numeroRT.ToString())
             {
                 return true;
             }
@@ -117,7 +117,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
         public List<Turno> buscarTurnoPosteriorFechaActual(DateTime fechaActual)
         {
-            List<Turno> turnosPosteriores = null;
+            List<Turno> turnosPosteriores = new List<Turno>();
             foreach (Turno T in turno)
             {
                 if(T.esPosteriorFechaActual(fechaActual))
@@ -131,10 +131,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
         public Turno esTurnoSeleccionado(String turnoSeleccionado)
         {
-            string[] turnos = turnoSeleccionado.Split(' ');
             foreach (Turno T in turno)
             {
-                if(T.esTurnoSeleccionado(turnos[2], turnos[3]))
+                if(T.esTurnoSeleccionado(turnoSeleccionado))
                 {
                     return T;
                 }

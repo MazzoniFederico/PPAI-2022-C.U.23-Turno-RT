@@ -8,12 +8,17 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 {
     class Turno
     {
+        private int id;
         private DateTime fechaGeneracion { get; set; }
         private String diaSemana { get; set; }
         private DateTime fechaHoraInicio { get; set; }
         private DateTime fechaHoraFin { get; set; }
         private List<CambioDeEstadoTurno> cambioDeEstadoTurno { get; set; }
 
+        public void setID(int id)
+        {
+            this.id = id;
+        }
         public void setDiaSemana(string str)
         {
             diaSemana = str;
@@ -45,6 +50,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return false;
         }
 
+        public int getID()
+        {
+            return id;
+        }
+
         public string getDiaSemana()
         {
             return diaSemana;
@@ -72,9 +82,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return fechaHoraFin;
         }
 
-        public bool esTurnoSeleccionado(string fechaInicio, string fechaFin)
+        public bool esTurnoSeleccionado(string numeroTurno)
         {
-            if(fechaHoraFin.ToString() == fechaInicio && fechaHoraFin.ToString() == fechaFin)
+            if(id.ToString() == numeroTurno)
             {
                 return true;
             }

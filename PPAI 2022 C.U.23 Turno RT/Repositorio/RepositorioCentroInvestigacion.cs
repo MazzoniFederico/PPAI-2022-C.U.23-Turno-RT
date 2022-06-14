@@ -66,13 +66,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                     foreach (DataRow respuesta in resTurno.Rows)
                     {
                         var turno = new Turno();
+                        turno.setID(int.Parse(respuesta["id"].ToString()));
                         turno.setFechaGeneracion(DateTime.Parse(respuesta["fechaGeneracion"].ToString()));
                         turno.setDiaSemana(respuesta["diaSemana"].ToString());
                         turno.setFechaHoraInicio(DateTime.Parse(respuesta["fechaHoraInicio"].ToString()));
                         turno.setFechaHoraFin(DateTime.Parse(respuesta["fechaHoraFin"].ToString()));
                         listaTurnos.Add(turno);
 
-                        string consulta4 = "SELECT * FROM CAMBIO_ESTADO_TURNO ce INNER JOIN ESTADO e ON ce.idEstado = e.id JOIN CAMBIO_ESTADOS_X_TURNO x ON ce.id = x.idCambioEstadoT JOIN TURNO t ON x.idTurno = t.id WHERE t.fechaHoraInicio = '" + turno.getFechaHoraInicio() + "'";
+                        string consulta4 = "SELECT * FROM CAMBIO_ESTADO_TURNO ce INNER JOIN ESTADO e ON ce.idEstado = e.id JOIN CAMBIO_ESTADOS_X_TURNO x ON ce.id = x.idCambioEstadoT WHERE x.idTurno  = " + turno.getID();
                         DataTable resEstado = bd.consulta(consulta4);
 
                         
@@ -81,11 +82,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                         {
                             var estado = new Estado();
                             var cambioDeEstadoTurno = new CambioDeEstadoTurno();
-                            estado.setNombre(resE["nombreEstado"].ToString());
+                            estado.setNombre(resE["nombre"].ToString());
                             estado.setDescripcion(resE["descripcion"].ToString());
                             estado.setAmbito(resE["ambito"].ToString());
-
-                            cambioDeEstadoTurno.setFechaHoraHasta(DateTime.Parse(resE["fechaHoraHasta"].ToString()));
+                            if (resE["fechaHoraHasta"].ToString() != "")
+                            {
+                                cambioDeEstadoTurno.setFechaHoraHasta(DateTime.Parse(resE["fechaHoraHasta"].ToString()));
+                            }
                             cambioDeEstadoTurno.setFechaHoraDesde(DateTime.Parse(resE["fechaHoraDesde"].ToString()));
 
                             cambioDeEstadoTurno.setEstado(estado);
