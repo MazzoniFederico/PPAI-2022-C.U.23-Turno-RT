@@ -27,12 +27,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             personalCientifico = personal;
         }
 
+        //Le pide a personal cientifico que compare usuario del personal con el logeado
         public bool esCientificoMiCentro(Usuario usuario)
         {
 
             return personalCientifico.validarUsuarioLogeado(usuario);
         }
-
+        
+        // busca el email y lo retorna
         public string getEmailCientifico()
         {
             return personalCientifico.getEmailInstitucional();

@@ -56,7 +56,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return correoElectronicoInstitucional;
         }
 
-
+        //Le pide a usuario que verifique si es el mismo usuario
         public bool validarUsuarioLogeado(Usuario usuario)
         {
             if (this.usuario.esUsuarioLog(usuario) )

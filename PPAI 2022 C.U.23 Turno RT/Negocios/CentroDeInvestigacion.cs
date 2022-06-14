@@ -105,22 +105,22 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         }
 
 
-
+        //Buscamos RT por tipo que no sean baja y formateamos el string de respuesta
         public List<string> buscarRTPorTipo(TipoRT tipoRT)
         {
-            //int numRec = new int();
             List<RecursoTecnologico> recurso = new List<RecursoTecnologico>();
             var datosRercurso = new List<string>();
+
+            //Busca RT por tipo que no sean baja los que cumplan con esto se agregan a una lista
             for (int i = 0; i < recursoTecnologico.Count; i++)
             {
                 if (recursoTecnologico[i].esTipoRTSeleccionado(tipoRT))
                 {
                     recurso.Add(recursoTecnologico[i]);
-                    //numRec += 1;
                 }
             }
 
-            //datosRercurso.Clear();
+            //Realizamos los gets para poder mostrar los datos necesarios y formateamos el mensaje
             foreach (var i in recurso)
             {
                 string var = "";
@@ -128,10 +128,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
                 var += "- " + i.getNumeroRT().ToString();
                 var += "- " + i.miModeloYMarca();
                 var += "- " + i.getEstado();
-                datosRercurso.Add(var);
-                //numRec = i.getNumeroRT();
-                
+                datosRercurso.Add(var);                
             }
+            //Retorna una lista de string con los datos de los distintos RT
             return datosRercurso;
             
         }
@@ -141,9 +140,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         {
             return nombre;
         }
-
+        //comapara usuario logeado con usuario de cintifico del centro
         public bool esCientificoMiCentro(Usuario usuario)
         {
+            //recorre las asignaciones del centro buscando el usuario correcto
             foreach (var asignacion in asignacionCientificoCI)
             {
                 if(asignacion.esCientificoMiCentro(usuario))
@@ -154,12 +154,15 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return false;
         }
 
+        //Buscamos el email para el usuario logeado
         public string buscarEmailCientifico(Usuario usuario)
         {
+            //busca el personal cientifico que tenga ese usuario
             foreach (var asignacion in asignacionCientificoCI)
             {
                 if (asignacion.esCientificoMiCentro(usuario))
                 {
+                    //busca el mail y lo retorna
                     return asignacion.getEmailCientifico();
                 }
             }

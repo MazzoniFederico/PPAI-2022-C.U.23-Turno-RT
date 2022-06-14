@@ -28,8 +28,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
         public bool queEstadoActivo()
         {
+            //verifica que el cambio de estado sea el actual
             if (esActual())
             {
+                //verifica si esta dado de baja (si esta dado de baja retorna true)
                 if(estado.estasDadoDeBaja())
                 {
                     return false;
@@ -47,6 +49,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
         public bool esActual()
         {
+            //Compara si la fecha hora Hasta es "Null" pero DateTime no acepta formato null
             if (fechaHoraHasta.ToString() == "1/1/0001 00:00:00")
             {
                 return true;

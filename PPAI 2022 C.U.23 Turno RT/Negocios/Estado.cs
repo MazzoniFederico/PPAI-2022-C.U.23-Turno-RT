@@ -27,6 +27,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             ambito = str;
         }
 
+        //Retorna false si es una baja
         public bool estasDadoDeBaja()
         {
             if (nombre != "Baja definitiva")

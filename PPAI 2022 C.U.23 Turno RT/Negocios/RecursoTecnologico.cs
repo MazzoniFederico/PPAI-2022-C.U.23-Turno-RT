@@ -62,8 +62,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
         public bool esTipoRTSeleccionado(TipoRT tipo)
         {
+            //Compara tipo RT seleccionado con el tipo RT de este recurso
             if(tipo.getNombre() == tipoRT.getNombre())
             {
+                //Verifica que el ultimo estado sea actual y no sea baja tecnica
                 for (int j = 0; j < cambioDeEstadoRT.Count; j++)
                 {
                     if(cambioDeEstadoRT[j].queEstadoActivo())
@@ -73,6 +75,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
                 }
                     
             }
+            //retorna falso porque no es del mismo tipo o porque es baja 
             return false;
         }
 
