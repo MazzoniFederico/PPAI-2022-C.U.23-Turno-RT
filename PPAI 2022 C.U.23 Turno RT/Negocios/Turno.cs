@@ -40,6 +40,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             this.cambioDeEstadoTurno = cambioDeEstadoTurno;
         }
 
+        //Compara fecha actual con fecha de inicio si es mayor la fecha inicio significa que va a ser posterior a la fecha actual
         public bool esPosteriorFechaActual(DateTime fechaActual)
         {
             if (fechaHoraInicio > fechaActual)
@@ -82,6 +83,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return fechaHoraFin;
         }
 
+        //Valida que sea el turno seleccionado
         public bool esTurnoSeleccionado(string numeroTurno)
         {
             if(id.ToString() == numeroTurno)
@@ -91,9 +93,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return false;
         }
 
-        public void actualizarEstadoTurnoReservado(DateTime fechaActual, Estado reservado)
+        //Registra la reserva del turno
+        public void registrarReservaTurno(DateTime fechaActual, Estado reservado)
         {
+            // Pone fin al cambio de estado actual asignando la fecha actual como fecha final
             cambioEstadoActual().setFechaHoraHasta(fechaActual);
+            // Crea un nuevo cambio de estado asignando fecha actual y el estado reservado y lo agrega a la lista
             cambioDeEstadoTurno.Add(new CambioDeEstadoTurno(reservado, fechaActual));
         }
     }

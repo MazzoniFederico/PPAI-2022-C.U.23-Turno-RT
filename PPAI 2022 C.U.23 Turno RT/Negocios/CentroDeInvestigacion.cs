@@ -169,6 +169,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return "";
         }
 
+        //Devuelve el recurso seleccionado
         public RecursoTecnologico esRecursoSeleccionado(string RT)
         {
             foreach (RecursoTecnologico recurso in recursoTecnologico)
@@ -181,6 +182,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return null;
         }
 
+        //Busca los turnos para el RT seleccionado
         public List<Turno> buscarTurnoPosteriorFechaActual(DateTime fechaActual, string RT)
         {
             return esRecursoSeleccionado(RT).buscarTurnoPosteriorFechaActual(fechaActual);

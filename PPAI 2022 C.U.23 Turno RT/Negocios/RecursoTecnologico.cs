@@ -118,13 +118,16 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return false;
         }
 
+        //Busca entre los turnos del recurso los que son posteriores a la fecha actual
         public List<Turno> buscarTurnoPosteriorFechaActual(DateTime fechaActual)
         {
             List<Turno> turnosPosteriores = new List<Turno>();
+
             foreach (Turno T in turno)
             {
                 if(T.esPosteriorFechaActual(fechaActual))
                 {
+                    //Agrega el turno que cumpla con esta condicion
                     turnosPosteriores.Add(T);
                 }
             }
@@ -132,10 +135,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return turnosPosteriores;
         }
 
+        //Busca el turno seleccionado para el RT seleccionado
         public Turno esTurnoSeleccionado(String turnoSeleccionado)
         {
             foreach (Turno T in turno)
             {
+                //valida que sea ese turno y lo retorna
                 if(T.esTurnoSeleccionado(turnoSeleccionado))
                 {
                     return T;

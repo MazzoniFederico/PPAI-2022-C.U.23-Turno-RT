@@ -23,7 +23,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         private List<string> recursoTecnologico = new List<string>();
         private string seleccionadoRecursoTecnologico;
         private CentroDeInvestigacion seleccionadoCentro;
-        private string direccionEmail;
+        private string direccionEmailInstitucional;
         private DateTime fechaActual = DateTime.Now;
         private string seleccionadoTurno;
 
@@ -137,12 +137,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         // (Podrian generarse otros metodos para devolver los otros modos de notificacion)
         public void buscarEmailInstitucional(Usuario usuario)
         { 
-             direccionEmail = seleccionadoCentro.buscarEmailCientifico(usuario);         
+             direccionEmailInstitucional = seleccionadoCentro.buscarEmailCientifico(usuario);         
         }
 
+        //recorre la lista de centros y guarda el que fue seleccionado
         public void centroSeleccionado(string seleccionado)
         {
-            //recorre la lista de centros y guarda el que fue seleccionado
             foreach (var centro in centroDeInvestigacion)
             {
                 if (centro.esCentroSeleccionado(seleccionado))
@@ -152,11 +152,18 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             }      
         }
 
+        //Busca los turnos que tengas fecha de inicio posterior a la fecha actual
         public List<String> buscarTurnoPosteriorFechaActual()
         {
+            //Variable para recorrer los turnos encontrados y formatearlos para la pantalla 
+            //(por parametro se pasa RT seleccionado y la fecha actual)
             List<Turno> turnos = seleccionadoCentro.buscarTurnoPosteriorFechaActual(fechaActual, seleccionadoRecursoTecnologico);
-            turnos.OrderBy(turno => turno.getFechaHoraInicio());
             List<String> turnosPorDia = new List<string>();
+
+            //Ordena los turnos por fecha y hora inicial
+            turnos.OrderBy(turno => turno.getFechaHoraInicio());
+
+            //Formatea los turnos para cargarlos en grilla
             for (int i = 0; i < turnos.Count; i++)
             {
                 turnosPorDia.Add("");
@@ -164,56 +171,79 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
                 turnosPorDia[i] += "-" + turnos[i].cambioEstadoActual().getEstado().getNombre();
                 turnosPorDia[i] += "-" + turnos[i].getFechaHoraFin().ToString();
                 turnosPorDia[i] += "-" + turnos[i].getID().ToString();
-                //a[i][4] = turnos[i].getDiaSemana();
             }
             return turnosPorDia;
         }
 
+        //Toma la seleccion del turno y establece las opciones de notificacion
         public void tomarSeleccionTurno(string turno, PantallaAdministrarTurno pantallaAdministrarTurno)
         {
             string opcionesNotificacion = "Email institucion-Email personal-Mensaje de texto";
+            //Asigna el turno seleccionado
             seleccionadoTurno = turno;
+
+            //Muestra los Datos seleccionados para la confirmacion de la reserva
             pantallaAdministrarTurno.mostrarDatosRTSeleccionado(seleccionadoRecursoTecnologico);
             pantallaAdministrarTurno.mostrarDatosTurnoSeleccionado(seleccionadoTurno);
             pantallaAdministrarTurno.mostrarOpcionesNoitificacion(opcionesNotificacion);
+            //Solicita que confirme la reserva
             pantallaAdministrarTurno.solicitarConfirmacion();
         }
 
+        //Toma la confirmacion de la reserva (por parametro viene la opcion de notificacion
         public void tomarConfirmacionReserva(PantallaAdministrarTurno pantallaAdministrarTurno, string opcionNotificacion, string confirmacion)
         {
+            // Busca el estado reservado
             buscarEstadoReservado();
-            actualizarEstadoTurnoReservado();
+            //Registra la reserva
+            registrarReservaTurno();
+
+            //Genera la notificacion
             generarNotificacionEmail(opcionNotificacion, confirmacion);
+
+            //Finaliza el CU mostrando un Message box con mensaje de exito
             finCU(pantallaAdministrarTurno);
         }
 
+        //Busca el estado Reservado entre todos los estados posibles
         public void buscarEstadoReservado()
         {
             foreach (Estado estado in estados)
             {
-                if (estado.getNombre() == "Reservado") ;
-                estadoReservado = estado;
+                if (estado.getNombre() == "Reservado")
+                {
+                    estadoReservado = estado;
+                }
             }
         }
 
-        public void actualizarEstadoTurnoReservado()
+        //Registra la reserva del turno
+        public void registrarReservaTurno()
         {
+            // Busca el turno seleccionado
             Turno turnoSeleccionado = seleccionadoCentro.esRecursoSeleccionado(seleccionadoRecursoTecnologico).esTurnoSeleccionado(seleccionadoTurno);
-            turnoSeleccionado.actualizarEstadoTurnoReservado(fechaActual, estadoReservado);
+
+            //Registrar la reserva del turno seleccionado
+            turnoSeleccionado.registrarReservaTurno(fechaActual, estadoReservado);
         }
 
+        //Formatea el mensaje de respuesta y lo manda a la interfaz para que envie el email
         public void generarNotificacionEmail(string opcionNotificacion,string confirmacion)
         {
-            string[] mensaje = confirmacion.Split('\n'); 
+            string[] mensaje = confirmacion.Split('\n');
 
+            // Valida que no sea un SMS en las otras 2 opciones seria por la misma interfaz
             if (opcionNotificacion != "Mensaje de texto")
             {
-                interfazNotificadorEmail.enviarNotificacionEmail(direccionEmail, mensaje);
+                //Por parametro pasa el mensaje y direccion Email
+                interfazNotificadorEmail.enviarNotificacionEmail(direccionEmailInstitucional, mensaje);
+                interfazNotificadorEmail.ShowDialog();
             }
-            interfazNotificadorEmail.ShowDialog();
+            
             
         }
 
+        // Fin Cu muestra un mensaje de exito y cierra la pantalla de administrar reserva turno
         public void finCU(PantallaAdministrarTurno pantallaAdministrarTurno)
         {
             MessageBox.Show("Turno registrado con exito");
