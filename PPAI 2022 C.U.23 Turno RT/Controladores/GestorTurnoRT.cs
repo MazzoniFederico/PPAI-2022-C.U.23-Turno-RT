@@ -37,13 +37,15 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         {
             //Traemos los datos desde la Base de datos
             //Centro de investigacion tiene todos los datos para los distintos centros
-            RepositorioCentroInvestigacion repoC = new RepositorioCentroInvestigacion();
-            RepositorioTipoRT repoTipoRT = new RepositorioTipoRT();
             //Estado todos los estados posibles
             RepositorioEstado repEstado = new RepositorioEstado();
             estados = repEstado.getEstados();
-            centroDeInvestigacion = repoC.GetCentroDeInvestigaciones();
+            RepositorioTipoRT repoTipoRT = new RepositorioTipoRT();
             var tipos = repoTipoRT.getTipoRT();
+            RepositorioCentroInvestigacion repoC = new RepositorioCentroInvestigacion();
+            
+            centroDeInvestigacion = repoC.GetCentroDeInvestigaciones(estados, sesion, tipos);
+            
 
             //Asignamos la sesion logueada
             this.sesion = sesion;
@@ -134,7 +136,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         {
             //Busca el usuario logeado
              Usuario usuario = sesion.getUsuario();
-             usuarioLogeado = usuario.getUsuario();
+             //usuarioLogeado = usuario.getUsuario();
             //comparamos el usuario logeado con los usuarios de los cientificos del centro seleccionado
              return seleccionadoCentro.esCientificoDeMiCentro(usuario);   
         }
