@@ -37,14 +37,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         public void mostrarTipoRT(List<TipoRT> tipoRTs)
         {
-            btn_Opcion_Registrar_Turno.Visible = false;
-            CBTipoRT.Visible = true;
-            CBTipoRT.Items.Clear();
-            CBTipoRT.Items.Add("Todos");
-            CBTipoRT.SelectedItem = "Todos";
+            btn_opcionRegistrarTurno.Visible = false;
+            CB_tipoRT.Visible = true;
+            CB_tipoRT.Items.Clear();
+            CB_tipoRT.Items.Add("Todos");
+            CB_tipoRT.SelectedItem = "Todos";
             foreach (TipoRT tipoRT in tipoRTs)
             {
-                CBTipoRT.Items.Add(tipoRT.toString());
+                CB_tipoRT.Items.Add(tipoRT.toString());
             }
 
         }
@@ -56,7 +56,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         public void tomarTipoRT()
         {
-            string[] tipoSelec = CBTipoRT.SelectedItem.ToString().Split('-');
+            string[] tipoSelec = CB_tipoRT.SelectedItem.ToString().Split('-');
             if(tipoSelec[0] == "Todos")
             {
                 MessageBox.Show("No puede seleccionar todos");
@@ -76,24 +76,24 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         public void mostrarDatosRT(List<string> datosRTPorCentro)
         {
             btn_tipoRT.Visible = false;
-            CBTipoRT.Visible = false;
-            lbl_Centro.Visible = true;
-            CB_CentroInvestigacion.Visible = true;
+            CB_tipoRT.Visible = false;
+            lbl_centro.Visible = true;
+            CB_centroInvestigacion.Visible = true;
             //gridRT.Visible = true;
             
 
 
-            CB_CentroInvestigacion.Items.Clear();
+            CB_centroInvestigacion.Items.Clear();
             for (int i = 0; i < datosRTPorCentro.Count(); i++)
             {
                 string[] datos = datosRTPorCentro[i].Split('-');
                 if (i > 0 && datos[i-1] != datosRTPorCentro[i].Split('-')[0])
                 {
-                    CB_CentroInvestigacion.Items.Add(datos[0]);
+                    CB_centroInvestigacion.Items.Add(datos[0]);
                 }
                 if(i == 0)
                 {
-                    CB_CentroInvestigacion.Items.Add(datos[0]);
+                    CB_centroInvestigacion.Items.Add(datos[0]);
                 }
 
                 gridRT.Rows.Add();
@@ -134,12 +134,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         //Muestra los datos de los turnos encontrados
         public void mostrarTurnos(List<string> turnos)
         {
-            Grid_Calendario.Visible = true;
+            Grid_calendario.Visible = true;
             gridRT.Visible = false;
             btn_seleccionarRT.Visible = false;
             btn_dia.Visible = true;
-            CB_CentroInvestigacion.Visible = false;
-            lbl_Centro.Visible = false;
+            CB_centroInvestigacion.Visible = false;
+            lbl_centro.Visible = false;
 
             //Carga el calendario
             if (cargarCalendario(turnos))
@@ -161,10 +161,10 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             bool hayDisponible = false;
             for (int i = 0; i < 30; i++)
             {
-                Grid_Calendario.Rows.Add();
-                Grid_Calendario.Rows[i].Cells[0].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[0];
-                Grid_Calendario.Rows[i].Cells[1].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[1];
-                Grid_Calendario.Rows[i].Cells[2].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[2];
+                Grid_calendario.Rows.Add();
+                Grid_calendario.Rows[i].Cells[0].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[0];
+                Grid_calendario.Rows[i].Cells[1].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[1];
+                Grid_calendario.Rows[i].Cells[2].Value = DateTime.Now.AddDays(i).ToString("dd-MM-yyyy").Split('-')[2];
             }
             for (int i = 0; i < turnos.Count; i++)
             {
@@ -172,11 +172,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                 string[] fechaInicial = datos[0].Split(' ')[0].Split('/');
                 if (datos[1] == "Disponible")
                 {
-                    for (int j = 0; j < Grid_Calendario.Rows.Count; j++)
+                    for (int j = 0; j < Grid_calendario.Rows.Count; j++)
                     {
-                        if(Grid_Calendario.Rows[j].Cells[0].Value.ToString() == fechaInicial[0])
+                        if(Grid_calendario.Rows[j].Cells[0].Value.ToString() == fechaInicial[0])
                         {
-                            Grid_Calendario.Rows[j].DefaultCellStyle.BackColor = Color.Blue;
+                            Grid_calendario.Rows[j].DefaultCellStyle.BackColor = Color.Blue;
                             hayDisponible = true;
                             break;
                         }
@@ -207,29 +207,29 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                 string[] dia = datos[0].Split(' ')[0].Split('/');
 
 
-                Grid_Turnos.Rows.Add();
-                Grid_Turnos.Rows[i].Cells[0].Value = dia[0] + dia[1];
-                Grid_Turnos.Rows[i].Cells[1].Value = horasInicio[1];
-                Grid_Turnos.Rows[i].Cells[2].Value = horasFin[1];
-                Grid_Turnos.Rows[i].Cells[3].Value = datos[1];
-                Grid_Turnos.Rows[i].Cells[4].Value = datos[3];
+                Grid_turnos.Rows.Add();
+                Grid_turnos.Rows[i].Cells[0].Value = dia[0] + dia[1];
+                Grid_turnos.Rows[i].Cells[1].Value = horasInicio[1];
+                Grid_turnos.Rows[i].Cells[2].Value = horasFin[1];
+                Grid_turnos.Rows[i].Cells[3].Value = datos[1];
+                Grid_turnos.Rows[i].Cells[4].Value = datos[3];
 
-                if (Grid_Turnos.Rows[i].Cells[3].Value.ToString() == "Disponible")
+                if (Grid_turnos.Rows[i].Cells[3].Value.ToString() == "Disponible")
                 {
-                    Grid_Turnos.Rows[i].DefaultCellStyle.BackColor = Color.Blue;
+                    Grid_turnos.Rows[i].DefaultCellStyle.BackColor = Color.Blue;
                 }
-                if (Grid_Turnos.Rows[i].Cells[3].Value.ToString() == "Reserva pendiente confirmacion")
+                if (Grid_turnos.Rows[i].Cells[3].Value.ToString() == "Reserva pendiente confirmacion")
                 {
-                    Grid_Turnos.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
+                    Grid_turnos.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
                 }
-                if (Grid_Turnos.Rows[i].Cells[3].Value.ToString() == "Reservado")
+                if (Grid_turnos.Rows[i].Cells[3].Value.ToString() == "Reservado")
                 {
-                    Grid_Turnos.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                    Grid_turnos.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                 }
-                if (Grid_Turnos.Rows[i].Cells[3].Value.ToString() == "Cancelado")
+                if (Grid_turnos.Rows[i].Cells[3].Value.ToString() == "Cancelado")
                 {
-                    Grid_Turnos.CurrentCell = null;
-                    Grid_Turnos.Rows[i].Visible = false;
+                    Grid_turnos.CurrentCell = null;
+                    Grid_turnos.Rows[i].Visible = false;
                 }
             }
         }
@@ -243,14 +243,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         //Toma seleccion de turno
         public void tomarSeleccionTurno()
         {
-            gestor.tomarSeleccionTurno(Grid_Turnos.SelectedRows[0].Cells[4].Value.ToString(), this);
+            gestor.tomarSeleccionTurno(Grid_turnos.SelectedRows[0].Cells[4].Value.ToString(), this);
         }
 
         public void mostrarDatosRTSeleccionado(string RT)
         {
             lbl_datosRT.Visible = true;
-            Grid_Calendario.Visible = false;
-            Grid_Turnos.Visible = false;
+            Grid_calendario.Visible = false;
+            Grid_turnos.Visible = false;
             btn_dia.Visible = false;
             btn_seleccionarTurno.Visible = false;
             string datosRT = "Numero RT: " + gridRT.CurrentRow.Cells[1].Value.ToString();
@@ -263,22 +263,22 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         public void mostrarDatosTurnoSeleccionado(string turno)
         {
             lbl_datosTurno.Visible = true;
-            string datosRT = "Hora inicio turno : " + Grid_Turnos.CurrentRow.Cells[1].Value.ToString();
-            datosRT += "\nHora Fin turno : " + Grid_Turnos.CurrentRow.Cells[2].Value.ToString();
+            string datosRT = "Hora inicio turno : " + Grid_turnos.CurrentRow.Cells[1].Value.ToString();
+            datosRT += "\nHora Fin turno : " + Grid_turnos.CurrentRow.Cells[2].Value.ToString();
 
             lbl_datosTurno.Text = datosRT;
         }
         public void mostrarOpcionesNotificacion(string opcionesNotificacion)
         {
             lbl_modoNotificacion.Visible = true;
-            cb_modoNotificacion.Visible = true;
+            CB_modoNotificacion.Visible = true;
             string[] opcion = opcionesNotificacion.Split('-');
 
             foreach (string op in opcion)
             {
-                cb_modoNotificacion.Items.Add(op);
+                CB_modoNotificacion.Items.Add(op);
             }
-            cb_modoNotificacion.SelectedIndex = 0;
+            CB_modoNotificacion.SelectedIndex = 0;
         }
 
         public void solicitarConfirmacion()
@@ -288,8 +288,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         public void tomarConfirmacionReserva()
         {
-            string mensaje = lbl_datosRT.Text + "\n" + lbl_datosTurno.Text + "\n" + Grid_Calendario.CurrentRow.Cells[0].Value.ToString() + "/" + Grid_Calendario.CurrentRow.Cells[1].Value.ToString() + "/" + Grid_Calendario.CurrentRow.Cells[2].Value.ToString();
-            gestor.tomarConfirmacionReserva(this, cb_modoNotificacion.SelectedItem.ToString(), mensaje);
+            string mensaje = lbl_datosRT.Text + "\n" + lbl_datosTurno.Text + "\n" + Grid_calendario.CurrentRow.Cells[0].Value.ToString() + "/" + Grid_calendario.CurrentRow.Cells[1].Value.ToString() + "/" + Grid_calendario.CurrentRow.Cells[2].Value.ToString();
+            gestor.tomarConfirmacionReserva(this, CB_modoNotificacion.SelectedItem.ToString(), mensaje);
         }
 
         private void btn_Opcion_Registrar_Turno_Click(object sender, EventArgs e)
@@ -305,7 +305,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             {
 
 
-                if (gridRT.Rows[i].Cells[0].Value.ToString() != CB_CentroInvestigacion.SelectedItem.ToString())
+                if (gridRT.Rows[i].Cells[0].Value.ToString() != CB_centroInvestigacion.SelectedItem.ToString())
                 {
                     gridRT.CurrentCell = null;
                     gridRT.Rows[i].Visible = false;
@@ -331,26 +331,26 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         private void btn_dia_Click(object sender, EventArgs e)
         {
-            if (Grid_Calendario.CurrentRow.Selected)
+            if (Grid_calendario.CurrentRow.Selected)
             {
 
 
-                if (Grid_Calendario.CurrentRow.DefaultCellStyle.BackColor == Color.Empty)
+                if (Grid_calendario.CurrentRow.DefaultCellStyle.BackColor == Color.Empty)
                 {
                     MessageBox.Show("Este dia no cuenta con turnos disponibles", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
-                    string fechaSeleccionada = Grid_Calendario.CurrentRow.Cells[0].Value.ToString() + Grid_Calendario.CurrentRow.Cells[1].Value.ToString();
-                    for (int i = 0; i < Grid_Turnos.Rows.Count; i++)
+                    string fechaSeleccionada = Grid_calendario.CurrentRow.Cells[0].Value.ToString() + Grid_calendario.CurrentRow.Cells[1].Value.ToString();
+                    for (int i = 0; i < Grid_turnos.Rows.Count; i++)
                     {
-                        if (Grid_Turnos.Rows[i].Cells[0].Value.ToString() == fechaSeleccionada)
+                        if (Grid_turnos.Rows[i].Cells[0].Value.ToString() == fechaSeleccionada)
                         {
-                            Grid_Turnos.CurrentCell = null;
-                            Grid_Turnos.Rows[i].Visible = false;
+                            Grid_turnos.CurrentCell = null;
+                            Grid_turnos.Rows[i].Visible = false;
                         }
                     }
-                    Grid_Turnos.Visible = true;
+                    Grid_turnos.Visible = true;
                     btn_seleccionarTurno.Visible = true;
                 }
             }
@@ -362,9 +362,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         private void btn_seleccionarTurno_Click(object sender, EventArgs e)
         {
-            if (Grid_Turnos.CurrentRow.Selected)
+            if (Grid_turnos.CurrentRow.Selected)
             {
-                if (Grid_Turnos.SelectedRows[0].Cells[3].Value.ToString() == "Disponible")
+                if (Grid_turnos.SelectedRows[0].Cells[3].Value.ToString() == "Disponible")
                 {
                     tomarSeleccionTurno();
                 }
