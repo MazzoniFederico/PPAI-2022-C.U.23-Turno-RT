@@ -145,6 +145,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         {
             return cambio.getEstado();
         }
+
+        //Envia el mensaje a turno
+        public void registrarReservaTurno(string turno, DateTime fechaActual, Estado estadoReservado)
+        {
+            esTurnoSeleccionado(turno).registrarReservaTurno(fechaActual, estadoReservado);
+        }
     }
 
     

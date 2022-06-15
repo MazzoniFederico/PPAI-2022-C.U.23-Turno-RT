@@ -189,5 +189,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             }
             return false;
         }
+
+        //Envia el mensaje a recurso tecnologico
+        public void registrarReservaTurno(string RT, string turno, DateTime fechaActual, Estado estadoReservado)
+        {
+            esRecursoSeleccionado(RT).registrarReservaTurno(turno, fechaActual, estadoReservado);
+        }
     }
 }

@@ -209,11 +209,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         //Registra la reserva del turno
         public void registrarReservaTurno()
         {
-            // Busca el turno seleccionado
-            Turno turnoSeleccionado = seleccionadoCentro.esRecursoSeleccionado(seleccionadoRecursoTecnologico).esTurnoSeleccionado(seleccionadoTurno);
-
-            //Registrar la reserva del turno seleccionado
-            turnoSeleccionado.registrarReservaTurno(fechaActual, estadoReservado);
+            // inicializa registrarReservaTurno
+            seleccionadoCentro.registrarReservaTurno(seleccionadoRecursoTecnologico, seleccionadoTurno, fechaActual, estadoReservado);
         }
 
         //Formatea el mensaje de respuesta y lo manda a la interfaz para que envie el email
