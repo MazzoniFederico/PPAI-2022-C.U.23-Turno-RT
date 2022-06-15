@@ -61,6 +61,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.CB_modoNotificacion = new System.Windows.Forms.ComboBox();
             this.lbl_modoNotificacion = new System.Windows.Forms.Label();
             this.btn_confirmarTurno = new System.Windows.Forms.Button();
+            this.btn_cancelarTurno = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridRT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_calendario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_turnos)).BeginInit();
@@ -353,10 +354,21 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.btn_confirmarTurno.Name = "btn_confirmarTurno";
             this.btn_confirmarTurno.Size = new System.Drawing.Size(150, 23);
             this.btn_confirmarTurno.TabIndex = 18;
-            this.btn_confirmarTurno.Text = "Confirmar turno";
+            this.btn_confirmarTurno.Text = "Confirmar reserva";
             this.btn_confirmarTurno.UseVisualStyleBackColor = true;
             this.btn_confirmarTurno.Visible = false;
             this.btn_confirmarTurno.Click += new System.EventHandler(this.btn_confirmarTurno_Click);
+            // 
+            // btn_cancelarTurno
+            // 
+            this.btn_cancelarTurno.Location = new System.Drawing.Point(268, 189);
+            this.btn_cancelarTurno.Name = "btn_cancelarTurno";
+            this.btn_cancelarTurno.Size = new System.Drawing.Size(150, 23);
+            this.btn_cancelarTurno.TabIndex = 19;
+            this.btn_cancelarTurno.Text = "Cancelar reserva";
+            this.btn_cancelarTurno.UseVisualStyleBackColor = true;
+            this.btn_cancelarTurno.Visible = false;
+            this.btn_cancelarTurno.Click += new System.EventHandler(this.btn_cancelarTurno_Click);
             // 
             // PantallaAdministrarTurno
             // 
@@ -364,6 +376,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(709, 414);
+            this.Controls.Add(this.btn_cancelarTurno);
             this.Controls.Add(this.btn_confirmarTurno);
             this.Controls.Add(this.lbl_modoNotificacion);
             this.Controls.Add(this.CB_modoNotificacion);
@@ -423,5 +436,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         private System.Windows.Forms.DataGridViewTextBoxColumn dia;
         private System.Windows.Forms.DataGridViewTextBoxColumn mes;
         private System.Windows.Forms.DataGridViewTextBoxColumn año;
+        private System.Windows.Forms.Button btn_cancelarTurno;
     }
 }

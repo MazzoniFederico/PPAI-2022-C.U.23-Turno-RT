@@ -183,6 +183,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                     }
                 }
             }
+
+            //Camino alternativo cu no hay turnos disponibles para ese RT
             if (!hayDisponible)
             {
                 MessageBox.Show("NO SE ENCONTRARON TURNOS DISPONIBLES PARA ESTE RECURSO TECNOLOGICO");
@@ -284,6 +286,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         public void solicitarConfirmacion()
         {
             btn_confirmarTurno.Visible = true;
+            btn_cancelarTurno.Visible = true;
         }
 
         public void tomarConfirmacionReserva()
@@ -379,9 +382,20 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             }
         }
 
+
+        //El usuario confirma reserva
         private void btn_confirmarTurno_Click(object sender, EventArgs e)
         {
             tomarConfirmacionReserva();
+        }
+
+
+        //Camino alternativo cu el usuario no confirma la reserva
+        private void btn_cancelarTurno_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Reserva Cancelada");
+            this.Close();
+            gestor.finCU(this, false);
         }
     }
 }
