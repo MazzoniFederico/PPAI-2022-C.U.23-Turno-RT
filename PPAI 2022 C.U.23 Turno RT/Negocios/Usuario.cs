@@ -31,7 +31,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         }
 
         //Valida si el usuario del personal es el mismo que el logeado
-        public bool esUsuarioLog(Usuario user)
+        public bool esUsuarioLogeado(Usuario user)
         {
             if(usuario == user.getUsuario())
             {

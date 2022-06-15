@@ -35,5 +35,17 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 
             return respuesta;
         }
+
+        public bool esTipoRTSeleccionado(TipoRT tipo)
+        {
+            if (nombre == tipo.getNombre())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

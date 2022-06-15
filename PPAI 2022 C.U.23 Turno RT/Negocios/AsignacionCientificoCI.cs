@@ -28,16 +28,25 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         }
 
         //Le pide a personal cientifico que compare usuario del personal con el logeado
-        public bool esCientificoMiCentro(Usuario usuario)
+        public string esCientificoDeMiCentro(Usuario usuario)
         {
-
-            return personalCientifico.validarUsuarioLogeado(usuario);
+            if(personalCientifico.validarUsuarioLogeado(usuario))
+            {
+                return personalCientifico.getEmailInstitucional();
+            }    
+            else
+            {
+                return "";
+            }
         }
         
-        // busca el email y lo retorna
-        public string getEmailCientifico()
+        public bool esVigente()
         {
-            return personalCientifico.getEmailInstitucional();
+            if (fechaHasta.ToString() == "1/1/0001 00:00:00")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

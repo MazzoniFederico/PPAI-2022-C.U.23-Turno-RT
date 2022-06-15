@@ -109,30 +109,32 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         public List<string> buscarRTPorTipo(TipoRT tipoRT)
         {
             List<RecursoTecnologico> recurso = new List<RecursoTecnologico>();
+            List<CambioDeEstadoRT> cambioDeEstadoRT = new List<CambioDeEstadoRT>();
             var datosRercurso = new List<string>();
 
             //Busca RT por tipo que no sean baja los que cumplan con esto se agregan a una lista
             for (int i = 0; i < recursoTecnologico.Count; i++)
             {
-                if (recursoTecnologico[i].esTipoRTSeleccionado(tipoRT))
+                var cambio = recursoTecnologico[i].esTipoRTSeleccionado(tipoRT);
+                if (null != cambio)
                 {
+                    cambioDeEstadoRT.Add(cambio);
                     recurso.Add(recursoTecnologico[i]);
                 }
             }
 
             //Realizamos los gets para poder mostrar los datos necesarios y formateamos el mensaje
-            foreach (var i in recurso)
+            for (int i = 0; i < recurso.Count; i++)
             {
                 string var = "";
                 var += this.nombre;
-                var += "- " + i.getNumeroRT().ToString();
-                var += "- " + i.miModeloYMarca();
-                var += "- " + i.getEstado();
-                datosRercurso.Add(var);                
+                var += "- " + recurso[i].getNumeroRT().ToString();
+                var += "- " + recurso[i].miModeloYMarca();
+                var += "- " + recurso[i].getEstado(cambioDeEstadoRT[i]);
+                datosRercurso.Add(var);           
             }
             //Retorna una lista de string con los datos de los distintos RT
             return datosRercurso;
-            
         }
 
        
@@ -141,29 +143,19 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return nombre;
         }
         //comapara usuario logeado con usuario de cintifico del centro
-        public bool esCientificoMiCentro(Usuario usuario)
+        public string esCientificoDeMiCentro(Usuario usuario)
         {
+
             //recorre las asignaciones del centro buscando el usuario correcto
             foreach (var asignacion in asignacionCientificoCI)
             {
-                if(asignacion.esCientificoMiCentro(usuario))
+                if (asignacion.esVigente())
                 {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        //Buscamos el email para el usuario logeado
-        public string buscarEmailCientifico(Usuario usuario)
-        {
-            //busca el personal cientifico que tenga ese usuario
-            foreach (var asignacion in asignacionCientificoCI)
-            {
-                if (asignacion.esCientificoMiCentro(usuario))
-                {
-                    //busca el mail y lo retorna
-                    return asignacion.getEmailCientifico();
+                    string email = asignacion.esCientificoDeMiCentro(usuario);
+                    if ("" != email)
+                    {
+                        return email;
+                    }
                 }
             }
             return "";
@@ -183,7 +175,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         }
 
         //Busca los turnos para el RT seleccionado
-        public List<Turno> buscarTurnoPosteriorFechaActual(DateTime fechaActual, string RT)
+        public List<string> buscarTurnoPosteriorFechaActual(DateTime fechaActual, string RT)
         {
             return esRecursoSeleccionado(RT).buscarTurnoPosteriorFechaActual(fechaActual);
             

@@ -60,23 +60,23 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             this.modelo = modelo;
         }
 
-        public bool esTipoRTSeleccionado(TipoRT tipo)
+        public CambioDeEstadoRT esTipoRTSeleccionado(TipoRT tipo)
         {
             //Compara tipo RT seleccionado con el tipo RT de este recurso
-            if(tipo.getNombre() == tipoRT.getNombre())
+            if(tipoRT.esTipoRTSeleccionado(tipo))
             {
                 //Verifica que el ultimo estado sea actual y no sea baja tecnica
                 for (int j = 0; j < cambioDeEstadoRT.Count; j++)
                 {
                     if(cambioDeEstadoRT[j].queEstadoActivo())
                     {
-                        return true;
+                        return cambioDeEstadoRT[j];
                     }
                 }
                     
             }
             //retorna falso porque no es del mismo tipo o porque es baja 
-            return false;
+            return null;
         }
 
         public int getNumeroRT()
@@ -89,24 +89,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             string modeloYMarca = "";
 
             modeloYMarca += modelo.getNombre();
-            modeloYMarca += "- " + modelo.getNombreMarca();
+            modeloYMarca += "- " + modelo.miMarca();
 
             return modeloYMarca;
-        }
-
-        public string getEstado()
-        {
-            string var = "";
-            foreach (var cambioEstado in cambioDeEstadoRT)
-            {
-                 var = cambioEstado.getEstado();
-                if (var != null)
-                {
-                    return var;
-                }
-            }
-
-            return "Baja";
         }
 
         public bool esRecursoSeleccionado(string RT)
@@ -119,20 +104,27 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         }
 
         //Busca entre los turnos del recurso los que son posteriores a la fecha actual
-        public List<Turno> buscarTurnoPosteriorFechaActual(DateTime fechaActual)
+        public List<string> buscarTurnoPosteriorFechaActual(DateTime fechaActual)
         {
-            List<Turno> turnosPosteriores = new List<Turno>();
+            List<string> turnosDia = new List<string>();
 
-            foreach (Turno T in turno)
+            for (int i = 0; i < turno.Count; i++)
             {
-                if(T.esPosteriorFechaActual(fechaActual))
+                if (turno[i].esPosteriorFechaActual(fechaActual))
                 {
                     //Agrega el turno que cumpla con esta condicion
-                    turnosPosteriores.Add(T);
+                    turnosDia.Add("");
+                    turnosDia[i] = turno[i].getFechaHoraInicio().ToString();
+                    turnosDia[i] += "-" + turno[i].cambioEstadoActual().getEstado().getNombre();
+                    turnosDia[i] += "-" + turno[i].getFechaHoraFin().ToString();
+                    turnosDia[i] += "-" + turno[i].getID().ToString();
                 }
             }
 
-            return turnosPosteriores;
+            //Ordena los turnos por fecha y hora inicial
+            turnosDia.Sort();
+
+            return turnosDia;
         }
 
         //Busca el turno seleccionado para el RT seleccionado
@@ -147,6 +139,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
                 }
             }
             return null;
+        }
+
+        public string getEstado(CambioDeEstadoRT cambio)
+        {
+            return cambio.getEstado();
         }
     }
 

@@ -29,9 +29,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_Centro = new System.Windows.Forms.Label();
             this.CB_CentroInvestigacion = new System.Windows.Forms.ComboBox();
             this.btn_Opcion_Registrar_Turno = new System.Windows.Forms.Button();
@@ -49,6 +49,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.horaFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Grid_Calendario = new System.Windows.Forms.DataGridView();
+            this.dia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_dia = new System.Windows.Forms.Button();
             this.Grid_Turnos = new System.Windows.Forms.DataGridView();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,9 +65,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.cb_modoNotificacion = new System.Windows.Forms.ComboBox();
             this.lbl_modoNotificacion = new System.Windows.Forms.Label();
             this.btn_confirmarTurno = new System.Windows.Forms.Button();
-            this.dia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridRT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_turno)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Calendario)).BeginInit();
@@ -132,14 +132,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.modeloRT,
             this.marcaRT,
             this.estadoRT});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridRT.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridRT.DefaultCellStyle = dataGridViewCellStyle4;
             this.gridRT.Location = new System.Drawing.Point(12, 148);
             this.gridRT.Name = "gridRT";
             this.gridRT.ReadOnly = true;
@@ -236,20 +236,41 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.dia,
             this.mes,
             this.año});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Grid_Calendario.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Grid_Calendario.DefaultCellStyle = dataGridViewCellStyle5;
             this.Grid_Calendario.Location = new System.Drawing.Point(12, 148);
             this.Grid_Calendario.Name = "Grid_Calendario";
             this.Grid_Calendario.ReadOnly = true;
             this.Grid_Calendario.Size = new System.Drawing.Size(250, 150);
             this.Grid_Calendario.TabIndex = 10;
             this.Grid_Calendario.Visible = false;
+            // 
+            // dia
+            // 
+            this.dia.HeaderText = "Dia";
+            this.dia.Name = "dia";
+            this.dia.ReadOnly = true;
+            this.dia.Width = 50;
+            // 
+            // mes
+            // 
+            this.mes.HeaderText = "Mes";
+            this.mes.Name = "mes";
+            this.mes.ReadOnly = true;
+            this.mes.Width = 50;
+            // 
+            // año
+            // 
+            this.año.HeaderText = "Año";
+            this.año.Name = "año";
+            this.año.ReadOnly = true;
+            this.año.Width = 50;
             // 
             // btn_dia
             // 
@@ -273,14 +294,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.fechaHoraFin,
             this.estadoTurno,
             this.numero});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Grid_Turnos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Grid_Turnos.DefaultCellStyle = dataGridViewCellStyle6;
             this.Grid_Turnos.Location = new System.Drawing.Point(295, 148);
             this.Grid_Turnos.Name = "Grid_Turnos";
             this.Grid_Turnos.Size = new System.Drawing.Size(372, 150);
@@ -377,33 +398,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.btn_confirmarTurno.Visible = false;
             this.btn_confirmarTurno.Click += new System.EventHandler(this.btn_confirmarTurno_Click);
             // 
-            // dia
-            // 
-            this.dia.HeaderText = "Dia";
-            this.dia.Name = "dia";
-            this.dia.ReadOnly = true;
-            this.dia.Width = 50;
-            // 
-            // mes
-            // 
-            this.mes.HeaderText = "Mes";
-            this.mes.Name = "mes";
-            this.mes.ReadOnly = true;
-            this.mes.Width = 50;
-            // 
-            // año
-            // 
-            this.año.HeaderText = "Año";
-            this.año.Name = "año";
-            this.año.ReadOnly = true;
-            this.año.Width = 50;
-            // 
             // PantallaAdministrarTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1036, 558);
+            this.ClientSize = new System.Drawing.Size(709, 414);
             this.Controls.Add(this.btn_confirmarTurno);
             this.Controls.Add(this.lbl_modoNotificacion);
             this.Controls.Add(this.cb_modoNotificacion);
@@ -425,7 +425,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.Name = "PantallaAdministrarTurno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reserva de Turno";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.gridRT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_turno)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Calendario)).EndInit();

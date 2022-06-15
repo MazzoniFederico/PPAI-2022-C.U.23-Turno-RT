@@ -59,7 +59,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             string[] tipoSelec = CBTipoRT.SelectedItem.ToString().Split('-');
             if(tipoSelec[0] == "Todos")
             {
-                MessageBox.Show("No puede seleccionar todos(?");
+                MessageBox.Show("No puede seleccionar todos");
             }
             else
             {
@@ -123,7 +123,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         public void solicitarSeleccionRT()
         {
-            
+            MessageBox.Show("Seleccione un centro de investigacion para ver los recursos existentes");
         }
 
         public void tomarSeleccionRT()
@@ -131,6 +131,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             gestor.tomarSeleccionRT(gridRT.CurrentRow.Cells[1].Value.ToString(), gridRT.CurrentRow.Cells[0].Value.ToString(), this);
         }
 
+        //Muestra los datos de los turnos encontrados
         public void mostrarTurnos(List<string> turnos)
         {
             Grid_Calendario.Visible = true;
@@ -140,15 +141,24 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             CB_CentroInvestigacion.Visible = false;
             lbl_Centro.Visible = false;
 
-            cargarCalendario(turnos);
+            //Carga el calendario
+            if (cargarCalendario(turnos))
+            {
+                //Carga los horarios
+                cargarHorarios(turnos);
+            }
+            else
+            {
+                this.Close();
+            }
+            
 
-            cargarHorarios(turnos);
-
-            //realizar Split de turnos
         }
 
-        public void cargarCalendario(List<string> turnos)
+        //carga el calendario realizando splits de turnos
+        public bool cargarCalendario(List<string> turnos)
         {
+            bool hayDisponible = false;
             for (int i = 0; i < 30; i++)
             {
                 Grid_Calendario.Rows.Add();
@@ -167,13 +177,26 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                         if(Grid_Calendario.Rows[j].Cells[0].Value.ToString() == fechaInicial[0])
                         {
                             Grid_Calendario.Rows[j].DefaultCellStyle.BackColor = Color.Blue;
+                            hayDisponible = true;
                             break;
                         }
                     }
                 }
             }
+            if (!hayDisponible)
+            {
+                MessageBox.Show("NO SE ENCONTRARON TURNOS DISPONIBLES PARA ESTE RECURSO TECNOLOGICO");
+                gestor.finCU(this, false);
+                return false;
+                
+            }
+            else
+            {
+                return true;
+            }
         }
 
+        //carga el horarios realizando splits de turnos
         public void cargarHorarios(List<string> turnos)
         {
             for (int i = 0; i < turnos.Count; i++)
@@ -211,11 +234,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             }
         }
 
+        //Muestra un mensaje
         public void solicitarSeleccionTurno()
         {
-            //gestor.tomarSeleccionTurno("turno", this);
+            MessageBox.Show("Seleccione una fecha, recuerde que las fechas en rojo no tienen turnos disponibles");
         }
 
+        //Toma seleccion de turno
         public void tomarSeleccionTurno()
         {
             gestor.tomarSeleccionTurno(Grid_Turnos.SelectedRows[0].Cells[4].Value.ToString(), this);
@@ -243,7 +268,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
             lbl_datosTurno.Text = datosRT;
         }
-        public void mostrarOpcionesNoitificacion(string opcionesNotificacion)
+        public void mostrarOpcionesNotificacion(string opcionesNotificacion)
         {
             lbl_modoNotificacion.Visible = true;
             cb_modoNotificacion.Visible = true;

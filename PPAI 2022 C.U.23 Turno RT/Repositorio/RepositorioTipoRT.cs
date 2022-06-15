@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
 {
-    static class RepositorioTipoRT
+    class RepositorioTipoRT
     {
-        public static List<TipoRT> GetTipoRTs()
+        public List<TipoRT> getTipoRT()
         {
             BaseDatos bd = new BaseDatos();
             string consulta = "SELECT * FROM TIPO_RT";
