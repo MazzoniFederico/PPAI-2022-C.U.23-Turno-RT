@@ -24,7 +24,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         private string seleccionadoRecursoTecnologico;
         private CentroDeInvestigacion seleccionadoCentro;
         private string direccionEmailInstitucional;
-        private DateTime fechaActual = DateTime.Now;
+        private DateTime fechaActual;
         private string seleccionadoTurno;
 
         public GestorTurnoRT(InterfazNotificadorEmail interfazNotificadorEmail)
@@ -116,13 +116,17 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             //verifica y  asigna el centro seleccionado
             centroSeleccionado(seleccionCentro);
 
+
+            buscarFechaHoraActual();
             //Verifica usuario logeado y busca el mail para el mismo
             direccionEmailInstitucional = verificarCentroInvestigacion();
             if (direccionEmailInstitucional != "")
             {
- 
+
                 //Busca y muestra los datos de los turnos para este RT
-                pantallaAdministrarTurno.mostrarTurnos(buscarTurnoPosteriorFechaActual());
+                List<string> turnos = buscarTurnoPosteriorFechaActual();
+                ordenarTurnos(turnos);
+                pantallaAdministrarTurno.mostrarTurnos(turnos);
                 pantallaAdministrarTurno.solicitarSeleccionTurno();
             }
             else
@@ -131,6 +135,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
                 MessageBox.Show("El usuario no es de ese centro");
             }
         }
+
+
         //Verifica que el cientifico sea del centro seleccionado con el user logeado
         public string verificarCentroInvestigacion()
         {
@@ -139,6 +145,18 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
              //usuarioLogeado = usuario.getUsuario();
             //comparamos el usuario logeado con los usuarios de los cientificos del centro seleccionado
              return seleccionadoCentro.esCientificoDeMiCentro(usuario);   
+        }
+
+        //Busca la fecha y hora actual
+        public void buscarFechaHoraActual()
+        {
+            fechaActual = DateTime.Now;
+        }
+
+        //Ordena los turnos
+        public void ordenarTurnos(List<string> turnos)
+        {
+            turnos.Sort();
         }
 
         //recorre la lista de centros y guarda el que fue seleccionado

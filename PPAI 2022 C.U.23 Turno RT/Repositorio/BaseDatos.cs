@@ -13,7 +13,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
     {
         SqlConnection conexion = new SqlConnection();
         SqlCommand cmd = new SqlCommand();
-        SqlTransaction transaction;
+        //SqlTransaction transaction;
 
         private void conectar()
         {

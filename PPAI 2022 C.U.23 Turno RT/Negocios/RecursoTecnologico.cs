@@ -120,10 +120,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
                     turnosDia[i] += "-" + turno[i].getID().ToString();
                 }
             }
-
-            //Ordena los turnos por fecha y hora inicial
-            turnosDia.Sort();
-
             return turnosDia;
         }
 
