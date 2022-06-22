@@ -32,7 +32,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             this.interfazNotificadorEmail = interfazNotificadorEmail;
         }
 
-        //Empieza el CU
+       
         public void opcionReservarTurno(PantallaAdministrarTurno pantallaAdministrarTurno, Sesion sesion)
         {
             //Traemos los datos desde la Base de datos
@@ -43,13 +43,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             RepositorioTipoRT repoTipoRT = new RepositorioTipoRT();
             var tipos = repoTipoRT.getTipoRT();
             RepositorioCentroInvestigacion repoC = new RepositorioCentroInvestigacion();
-            
             centroDeInvestigacion = repoC.GetCentroDeInvestigaciones(estados, sesion, tipos);
-            
-
-            //Asignamos la sesion logueada
             this.sesion = sesion;
 
+
+
+
+            //Empieza el CU
             //Buscamos todos los tipos de recursos
             buscarTipoRT(tipos);
             //Se muestra y solicita la seleccion de TipoRT
