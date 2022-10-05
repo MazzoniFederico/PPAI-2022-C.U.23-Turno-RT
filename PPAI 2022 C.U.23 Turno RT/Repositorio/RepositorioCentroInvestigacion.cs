@@ -206,6 +206,15 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
                     {
                         personalCientifico.setUsuario(usu);
                     }
+                    else
+                    {
+                        var usuario = new Usuario();
+                        usuario.setUsuario(resP["usuario"].ToString());
+                        usuario.setClave(resP["contraseña"].ToString());
+                        usuario.setHabilitado(bool.Parse(resP["habilitado"].ToString()));
+
+                        personalCientifico.setUsuario(usuario);
+                    }
 
                     
                 }
