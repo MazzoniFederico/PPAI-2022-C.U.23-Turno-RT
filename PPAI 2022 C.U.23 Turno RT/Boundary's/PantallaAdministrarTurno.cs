@@ -350,7 +350,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
                         if (Grid_turnos.Rows[i].Cells[0].Value.ToString() == fechaSeleccionada)
                         {
                             Grid_turnos.CurrentCell = null;
-                            Grid_turnos.Rows[i].Visible = false;
+                            //Grid_turnos.Rows[i].Visible = false;
                         }
                     }
                     Grid_turnos.Visible = true;

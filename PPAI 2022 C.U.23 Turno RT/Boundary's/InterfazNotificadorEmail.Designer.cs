@@ -37,11 +37,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             // 
             this.lbl_mail.AutoSize = true;
             this.lbl_mail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lbl_mail.Location = new System.Drawing.Point(47, 57);
+            this.lbl_mail.Location = new System.Drawing.Point(254, 61);
             this.lbl_mail.Name = "lbl_mail";
-            this.lbl_mail.Size = new System.Drawing.Size(51, 20);
+            this.lbl_mail.Size = new System.Drawing.Size(185, 20);
             this.lbl_mail.TabIndex = 0;
-            this.lbl_mail.Text = "label1";
+            this.lbl_mail.Text = "Correo enviado con Exito";
             // 
             // lbl_Mensaje
             // 
