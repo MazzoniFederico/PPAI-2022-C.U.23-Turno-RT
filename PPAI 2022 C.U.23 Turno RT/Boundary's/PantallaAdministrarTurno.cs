@@ -123,7 +123,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         public void solicitarSeleccionRT()
         {
-            MessageBox.Show("Seleccione un centro de investigacion para ver los recursos existentes");
+            //MessageBox.Show("Seleccione un centro de investigacion para ver los recursos existentes");
         }
 
         public void tomarSeleccionRT()
@@ -239,7 +239,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         //Muestra un mensaje
         public void solicitarSeleccionTurno()
         {
-            MessageBox.Show("Seleccione una fecha, recuerde que las fechas en rojo no tienen turnos disponibles");
+            //MessageBox.Show("Seleccione una fecha, recuerde que las fechas en rojo no tienen turnos disponibles");
         }
 
         //Toma seleccion de turno

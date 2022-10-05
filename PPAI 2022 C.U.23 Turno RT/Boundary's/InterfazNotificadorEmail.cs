@@ -25,7 +25,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
 
         public void enviarNotificacionEmail(string direccionEmail, string[] confirm)
         {
-            /*string mensaje = "";
+            string mensaje = "";
             mensaje += "TURNO CONFIRMADO";
             mensaje +=  "\n" + confirm[0];
             mensaje +=  confirm[1];
@@ -35,14 +35,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             mensaje += "\nFecha del turno: " + confirm[5];
 
 
-            lbl_mail.Text = "Direccion Email: " + direccionEmail;
-            lbl_Mensaje.Text = mensaje;*/
-
             MailMessage correo = new MailMessage();
             correo.From = new MailAddress("Maxwelcito@outlook.com", "Centro investigacion", System.Text.Encoding.UTF8);//Correo de salida
             correo.To.Add(direccionEmail); //Correo destino?
             correo.Subject = "Recurso reservado"; //Asunto
-            correo.Body = "Este es un correo de prueba desde c#"; //Mensaje del correo
+            correo.Body = mensaje; //Mensaje del correo
             correo.IsBodyHtml = false;
             correo.Priority = MailPriority.Normal;
             SmtpClient smtp = new SmtpClient();

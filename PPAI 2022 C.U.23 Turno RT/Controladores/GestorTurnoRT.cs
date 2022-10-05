@@ -243,9 +243,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             {
                 //Por parametro pasa el mensaje y direccion Email
                 interfazNotificadorEmail.enviarNotificacionEmail(direccionEmailInstitucional, mensaje);
-                interfazNotificadorEmail.ShowDialog();
+                //Se envia la notificacion
+                //interfazNotificadorEmail.ShowDialog();
+                MessageBox.Show("Notificacion enviada con exito");
             }
-            
+            else
+            {
+                MessageBox.Show("Mensaje enviado");
+            }
             
         }
 

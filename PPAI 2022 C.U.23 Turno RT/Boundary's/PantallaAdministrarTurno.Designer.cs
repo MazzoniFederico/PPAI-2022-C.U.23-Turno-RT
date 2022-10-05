@@ -29,9 +29,9 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_centro = new System.Windows.Forms.Label();
             this.CB_centroInvestigacion = new System.Windows.Forms.ComboBox();
             this.btn_opcionRegistrarTurno = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             // lbl_centro
             // 
             this.lbl_centro.AutoSize = true;
-            this.lbl_centro.Location = new System.Drawing.Point(187, 62);
+            this.lbl_centro.Location = new System.Drawing.Point(250, 62);
             this.lbl_centro.Name = "lbl_centro";
             this.lbl_centro.Size = new System.Drawing.Size(129, 13);
             this.lbl_centro.TabIndex = 0;
@@ -82,14 +82,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.CB_centroInvestigacion.FormattingEnabled = true;
             this.CB_centroInvestigacion.Location = new System.Drawing.Point(14, 59);
             this.CB_centroInvestigacion.Name = "CB_centroInvestigacion";
-            this.CB_centroInvestigacion.Size = new System.Drawing.Size(167, 21);
+            this.CB_centroInvestigacion.Size = new System.Drawing.Size(217, 21);
             this.CB_centroInvestigacion.TabIndex = 1;
             this.CB_centroInvestigacion.Visible = false;
             this.CB_centroInvestigacion.SelectedIndexChanged += new System.EventHandler(this.CB_CentroInvestigacion_SelectedIndexChanged);
             // 
             // btn_opcionRegistrarTurno
             // 
-            this.btn_opcionRegistrarTurno.Location = new System.Drawing.Point(152, 295);
+            this.btn_opcionRegistrarTurno.Location = new System.Drawing.Point(244, 180);
             this.btn_opcionRegistrarTurno.Name = "btn_opcionRegistrarTurno";
             this.btn_opcionRegistrarTurno.Size = new System.Drawing.Size(232, 41);
             this.btn_opcionRegistrarTurno.TabIndex = 2;
@@ -108,12 +108,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             // 
             // btn_tipoRT
             // 
+            this.btn_tipoRT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btn_tipoRT.Location = new System.Drawing.Point(247, 57);
             this.btn_tipoRT.Name = "btn_tipoRT";
             this.btn_tipoRT.Size = new System.Drawing.Size(137, 23);
             this.btn_tipoRT.TabIndex = 4;
             this.btn_tipoRT.Text = "Confirmar Tipo RT";
-            this.btn_tipoRT.UseVisualStyleBackColor = true;
+            this.btn_tipoRT.UseVisualStyleBackColor = false;
             this.btn_tipoRT.Visible = false;
             this.btn_tipoRT.Click += new System.EventHandler(this.btn_tipoRT_Click);
             // 
@@ -128,14 +129,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.modeloRT,
             this.marcaRT,
             this.estadoRT});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridRT.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridRT.DefaultCellStyle = dataGridViewCellStyle16;
             this.gridRT.Location = new System.Drawing.Point(12, 148);
             this.gridRT.Name = "gridRT";
             this.gridRT.ReadOnly = true;
@@ -179,12 +180,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             // 
             // btn_seleccionarRT
             // 
+            this.btn_seleccionarRT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btn_seleccionarRT.Location = new System.Drawing.Point(169, 304);
             this.btn_seleccionarRT.Name = "btn_seleccionarRT";
             this.btn_seleccionarRT.Size = new System.Drawing.Size(201, 23);
             this.btn_seleccionarRT.TabIndex = 6;
             this.btn_seleccionarRT.Text = "Seleccionar Recurso Tecnologico";
-            this.btn_seleccionarRT.UseVisualStyleBackColor = true;
+            this.btn_seleccionarRT.UseVisualStyleBackColor = false;
             this.btn_seleccionarRT.Visible = false;
             this.btn_seleccionarRT.Click += new System.EventHandler(this.btn_seleccionarRT_Click);
             // 
@@ -197,14 +199,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.dia,
             this.mes,
             this.año});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Grid_calendario.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Grid_calendario.DefaultCellStyle = dataGridViewCellStyle17;
             this.Grid_calendario.Location = new System.Drawing.Point(12, 148);
             this.Grid_calendario.Name = "Grid_calendario";
             this.Grid_calendario.ReadOnly = true;
@@ -235,12 +237,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             // 
             // btn_dia
             // 
+            this.btn_dia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btn_dia.Location = new System.Drawing.Point(88, 304);
             this.btn_dia.Name = "btn_dia";
             this.btn_dia.Size = new System.Drawing.Size(75, 23);
             this.btn_dia.TabIndex = 11;
             this.btn_dia.Text = "Elegir dia";
-            this.btn_dia.UseVisualStyleBackColor = true;
+            this.btn_dia.UseVisualStyleBackColor = false;
             this.btn_dia.Visible = false;
             this.btn_dia.Click += new System.EventHandler(this.btn_dia_Click);
             // 
@@ -255,14 +258,14 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.fechaHoraFin,
             this.estadoTurno,
             this.numero});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Grid_turnos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Grid_turnos.DefaultCellStyle = dataGridViewCellStyle18;
             this.Grid_turnos.Location = new System.Drawing.Point(295, 148);
             this.Grid_turnos.Name = "Grid_turnos";
             this.Grid_turnos.Size = new System.Drawing.Size(372, 150);
@@ -298,12 +301,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             // 
             // btn_seleccionarTurno
             // 
+            this.btn_seleccionarTurno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btn_seleccionarTurno.Location = new System.Drawing.Point(431, 304);
             this.btn_seleccionarTurno.Name = "btn_seleccionarTurno";
             this.btn_seleccionarTurno.Size = new System.Drawing.Size(75, 23);
             this.btn_seleccionarTurno.TabIndex = 13;
             this.btn_seleccionarTurno.Text = "Elegir turno";
-            this.btn_seleccionarTurno.UseVisualStyleBackColor = true;
+            this.btn_seleccionarTurno.UseVisualStyleBackColor = false;
             this.btn_seleccionarTurno.Visible = false;
             this.btn_seleccionarTurno.Click += new System.EventHandler(this.btn_seleccionarTurno_Click);
             // 
@@ -350,23 +354,25 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             // 
             // btn_confirmarTurno
             // 
-            this.btn_confirmarTurno.Location = new System.Drawing.Point(88, 189);
+            this.btn_confirmarTurno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btn_confirmarTurno.Location = new System.Drawing.Point(169, 304);
             this.btn_confirmarTurno.Name = "btn_confirmarTurno";
             this.btn_confirmarTurno.Size = new System.Drawing.Size(150, 23);
             this.btn_confirmarTurno.TabIndex = 18;
             this.btn_confirmarTurno.Text = "Confirmar reserva";
-            this.btn_confirmarTurno.UseVisualStyleBackColor = true;
+            this.btn_confirmarTurno.UseVisualStyleBackColor = false;
             this.btn_confirmarTurno.Visible = false;
             this.btn_confirmarTurno.Click += new System.EventHandler(this.btn_confirmarTurno_Click);
             // 
             // btn_cancelarTurno
             // 
-            this.btn_cancelarTurno.Location = new System.Drawing.Point(268, 189);
+            this.btn_cancelarTurno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_cancelarTurno.Location = new System.Drawing.Point(431, 304);
             this.btn_cancelarTurno.Name = "btn_cancelarTurno";
             this.btn_cancelarTurno.Size = new System.Drawing.Size(150, 23);
             this.btn_cancelarTurno.TabIndex = 19;
             this.btn_cancelarTurno.Text = "Cancelar reserva";
-            this.btn_cancelarTurno.UseVisualStyleBackColor = true;
+            this.btn_cancelarTurno.UseVisualStyleBackColor = false;
             this.btn_cancelarTurno.Visible = false;
             this.btn_cancelarTurno.Click += new System.EventHandler(this.btn_cancelarTurno_Click);
             // 
@@ -375,7 +381,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(709, 414);
+            this.ClientSize = new System.Drawing.Size(669, 336);
             this.Controls.Add(this.btn_cancelarTurno);
             this.Controls.Add(this.btn_confirmarTurno);
             this.Controls.Add(this.lbl_modoNotificacion);
@@ -386,13 +392,13 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             this.Controls.Add(this.btn_dia);
             this.Controls.Add(this.btn_seleccionarRT);
             this.Controls.Add(this.btn_tipoRT);
-            this.Controls.Add(this.btn_opcionRegistrarTurno);
             this.Controls.Add(this.CB_centroInvestigacion);
             this.Controls.Add(this.lbl_centro);
             this.Controls.Add(this.CB_tipoRT);
             this.Controls.Add(this.gridRT);
             this.Controls.Add(this.Grid_calendario);
             this.Controls.Add(this.Grid_turnos);
+            this.Controls.Add(this.btn_opcionRegistrarTurno);
             this.MinimizeBox = false;
             this.Name = "PantallaAdministrarTurno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
