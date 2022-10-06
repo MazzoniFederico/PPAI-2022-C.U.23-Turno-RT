@@ -33,7 +33,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Boundary_s
             mensaje += "\n" + confirm[3];
             mensaje += "\n" + confirm[4];
             mensaje += "\nFecha del turno: " + confirm[5];
-
+            mensaje += "\n\n UTN";
 
             MailMessage correo = new MailMessage();
             correo.From = new MailAddress("Maxwelcito@outlook.com", "Centro investigacion", System.Text.Encoding.UTF8);//Correo de salida

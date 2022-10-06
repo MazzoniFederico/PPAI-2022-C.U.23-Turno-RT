@@ -116,13 +116,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             //verifica y  asigna el centro seleccionado
             centroSeleccionado(seleccionCentro);
 
-
             buscarFechaHoraActual();
             //Verifica usuario logeado y busca el mail para el mismo
             direccionEmailInstitucional = verificarCentroInvestigacion();
             if (direccionEmailInstitucional != "")
             {
-
                 //Busca y muestra los datos de los turnos para este RT
                 List<string> turnos = buscarTurnoPosteriorFechaActual();
                 ordenarTurnos(turnos);
@@ -135,7 +133,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
                 MessageBox.Show("El usuario no es de ese centro");
             }
         }
-
 
         //Verifica que el cientifico sea del centro seleccionado con el user logeado
         public string verificarCentroInvestigacion()
@@ -251,7 +248,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             {
                 MessageBox.Show("Mensaje enviado");
             }
-            
         }
 
         // Fin Cu muestra un mensaje de exito y cierra la pantalla de administrar reserva turno
