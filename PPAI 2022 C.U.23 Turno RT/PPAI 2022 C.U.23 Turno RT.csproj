@@ -78,12 +78,15 @@
     <Compile Include="Negocios\CambioDeEstadoRT.cs" />
     <Compile Include="Negocios\CambioDeEstadoTurno.cs" />
     <Compile Include="Negocios\CentroDeInvestigacion.cs" />
+    <Compile Include="Negocios\ConAntelacion.cs" />
     <Compile Include="Negocios\Estado.cs" />
+    <Compile Include="Negocios\IEstrategiaAntelacion.cs" />
     <Compile Include="Negocios\Marca.cs" />
     <Compile Include="Negocios\Modelo.cs" />
     <Compile Include="Negocios\PersonalCientifico.cs" />
     <Compile Include="Negocios\RecursoTecnologico.cs" />
     <Compile Include="Negocios\Sesion.cs" />
+    <Compile Include="Negocios\SinAntelacion.cs" />
     <Compile Include="Negocios\TipoRT.cs" />
     <Compile Include="Negocios\Turno.cs" />
     <Compile Include="Negocios\Usuario.cs" />
