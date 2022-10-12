@@ -42,6 +42,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             return nombre;
         }
 
+        public string getAmbito()
+        {
+            return ambito;
+        }
+
         public bool esAmbitoTurno()
         {
             if(ambito == "Turno")
