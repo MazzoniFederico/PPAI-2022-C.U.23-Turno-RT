@@ -38,25 +38,27 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
             bd.insertar(sql);
         }
 
-        public void cargarCambioEstado(CambioDeEstadoTurno cambioDeEstadoTurno)
+        public void cargarCambioEstado(CambioDeEstadoTurno cambioDeEstadoTurno, Turno turno)
         {
             BaseDatos bd = new BaseDatos();
             var consulta = "Select id FROM ESTADO where nombre = '" + cambioDeEstadoTurno.getEstado().getNombre() +
             "' AND ambito = '" + cambioDeEstadoTurno.getEstado().getAmbito() + "'";
             DataTable res = bd.consulta(consulta);
-
+            int idCEAnterior = int.Parse(res.Rows[0]["id"].ToString());
+            
             //ESTA MAL FALTA EL TEMA DEL ID AUTOMATICO
 
             string insert = @"INSERT INTO CAMBIO_ESTADO_TURNO(fechaHoraDesde, fechaHoraHasta, idEstado) VALUES('"
                 + cambioDeEstadoTurno.getFechaHoraDesde().ToString("yyyy-MM-dd") + "'," +
-                "NULL, " + res.Rows[0]["id"].ToString() + ");";
+                "NULL, " + idCEAnterior + ");";
             bd.insertar(insert);
 
-            int num = int.Parse(bd.consulta("SELECT MAX(id) max_id FROM CAMBIO_ESTADO_TURNO").Rows[0]["max_id"].ToString());
+            int idCE = int.Parse(bd.consulta("SELECT MAX(id) max_id FROM CAMBIO_ESTADO_TURNO").Rows[0]["max_id"].ToString());
+
+            int iTU = int.Parse(bd.consulta("SELECT idTurno FROM CAMBIO_ESTADOS_X_TURNO WHERE idCambioEstadoT = " + idCEAnterior).ToString());
 
             string insert2 = @"INSERT INTO CAMBIO_ESTADOS_X_TURNO(idTurno, idCambioEstadoT) VALUES("
-                + num;
-                
+                + idCE + ", " + iTU + ");";
         }
     }
 }
