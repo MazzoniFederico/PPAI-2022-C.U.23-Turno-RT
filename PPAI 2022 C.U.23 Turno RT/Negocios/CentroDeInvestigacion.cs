@@ -87,6 +87,12 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         {
             this.tiempoAntelacionReserva = tiempoAntelacion;
         }
+
+        public String getTiempoAntelacionReserva()
+        {
+            return tiempoAntelacionReserva;
+        }
+           
         public void setMotivoBaja(string motivo)
         {
             motivoBaja = motivo;

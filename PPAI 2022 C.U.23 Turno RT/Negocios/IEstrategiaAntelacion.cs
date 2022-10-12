@@ -8,6 +8,6 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
 {
     interface IEstrategiaAntelacion
     {
-        List<String> buscarTurnos(DateTime fechaActual, RecursoTecnologico recursoTecnologicoSeleccionado);
+        List<String> buscarTurnos(DateTime fechaActual, String recursoTecnologicoSeleccionado, CentroDeInvestigacion centro);
     }
 }

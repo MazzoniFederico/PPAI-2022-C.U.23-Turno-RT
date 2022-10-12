@@ -13,6 +13,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
     public class GestorTurnoRT
     {
         private Sesion sesion;
+        private IEstrategiaAntelacion estrategia;
         private string usuarioLogeado;
         private Estado estadoReservado;
         private List<Estado> estados;
@@ -117,21 +118,42 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
             centroSeleccionado(seleccionCentro);
 
             buscarFechaHoraActual();
+
             //Verifica usuario logeado y busca el mail para el mismo
             direccionEmailInstitucional = verificarCentroInvestigacion();
+            IEstrategiaAntelacion est = crearEstrategia();
+            agregarEstrategia(est);
+
+            //Busca y muestra los datos de los turnos para este RT
+            List<string> turnos = buscarTurnoPosteriorFechaActual();
+            ordenarTurnos(turnos);
+            pantallaAdministrarTurno.mostrarTurnos(turnos);
+            pantallaAdministrarTurno.solicitarSeleccionTurno();
+        }
+
+        private IEstrategiaAntelacion crearEstrategia()
+        {
             if (direccionEmailInstitucional != "")
             {
-                //Busca y muestra los datos de los turnos para este RT
-                List<string> turnos = buscarTurnoPosteriorFechaActual();
-                ordenarTurnos(turnos);
-                pantallaAdministrarTurno.mostrarTurnos(turnos);
-                pantallaAdministrarTurno.solicitarSeleccionTurno();
+                //Se crea la estrategia sin antelacion para cientifico del mismo centro
+                IEstrategiaAntelacion est = new SinAntelacion();
+                return est;
             }
+
             else
             {
-                //Si el cientifico no es de este centro es un caso alternativo
-                MessageBox.Show("El usuario no es de ese centro");
+                //Si el cientifico no es de este centro se crea una estrategia con antelacion
+                MessageBox.Show("Los turnos se muestran con tiempo de antelacion");
+                IEstrategiaAntelacion est = new ConAntelacion();
+                return est;
             }
+        }
+
+        //Definimos la estrategia para la busqueda de turnos
+        private void agregarEstrategia(IEstrategiaAntelacion estra)
+        {
+            //estrategia.add(est)
+            estrategia = estra;
         }
 
         //Verifica que el cientifico sea del centro seleccionado con el user logeado
@@ -139,7 +161,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         {
             //Busca el usuario logeado
              Usuario usuario = sesion.getUsuario();
-             //usuarioLogeado = usuario.getUsuario();
+
             //comparamos el usuario logeado con los usuarios de los cientificos del centro seleccionado
              return seleccionadoCentro.esCientificoDeMiCentro(usuario);   
         }
@@ -165,7 +187,7 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
                 {
                     seleccionadoCentro = centro;
                 }
-            }      
+            }
         }
 
         //Busca los turnos que tengas fecha de inicio posterior a la fecha actual
@@ -173,8 +195,8 @@ namespace PPAI_2022_C.U._23_Turno_RT.Controladores
         {
             //Variable para recorrer los turnos encontrados y formatearlos para la pantalla 
             //(por parametro se pasa RT seleccionado y la fecha actual)
-            List<string> turnosPorDia = seleccionadoCentro.buscarTurnoPosteriorFechaActual(fechaActual, seleccionadoRecursoTecnologico);
-
+            //seleccionadoCentro.buscarTurnoPosteriorFechaActual(fechaActual, seleccionadoRecursoTecnologico);
+            List<string> turnosPorDia = estrategia.buscarTurnos(fechaActual, seleccionadoRecursoTecnologico, seleccionadoCentro);
             return turnosPorDia;
         }
 
