@@ -40,6 +40,11 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
             this.cambioDeEstadoTurno = cambioDeEstadoTurno;
         }
 
+        public List<CambioDeEstadoTurno> GetCambioDeEstadoTurnos()
+        {
+            return cambioDeEstadoTurno;
+        }
+
         //Compara fecha actual con fecha de inicio si es mayor la fecha inicio significa que va a ser posterior a la fecha actual
         public bool esPosteriorFechaActual(DateTime fechaActual)
         {

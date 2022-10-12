@@ -25,10 +25,22 @@ namespace PPAI_2022_C.U._23_Turno_RT.Negocios
         {
             fechaHoraDesde = fecha;
         }
+
+        public DateTime getFechaHoraDesde()
+        {
+            return fechaHoraDesde;
+        }
+
         public void setFechaHoraHasta(DateTime fecha)
         {
             fechaHoraHasta = fecha;
         }
+
+        public DateTime getFechaHoraHasta()
+        {
+            return fechaHoraHasta;
+        }
+
         public void setEstado(Estado estado)
         {
             this.estado = estado;

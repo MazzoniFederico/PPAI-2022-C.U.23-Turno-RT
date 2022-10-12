@@ -54,7 +54,17 @@ namespace PPAI_2022_C.U._23_Turno_RT.Repositorio
         {
             conectar();
             cmd.CommandText = sql;
-            cmd.ExecuteNonQuery();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Error en ejecución de comando.\n\n"
+                                + sql
+                                + "\n Mensaje del error: \n" + e.Message);
+            }
+            
             desconectar();
         }
     }

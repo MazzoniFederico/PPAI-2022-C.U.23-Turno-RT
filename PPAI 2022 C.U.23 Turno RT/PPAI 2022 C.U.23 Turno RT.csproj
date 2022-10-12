@@ -97,6 +97,7 @@
     <Compile Include="Repositorio\RepositorioEstado.cs" />
     <Compile Include="Repositorio\RepositorioSesion.cs" />
     <Compile Include="Repositorio\RepositorioTipoRT.cs" />
+    <Compile Include="Repositorio\RepositorioTurno.cs" />
     <EmbeddedResource Include="Boundary%27s\InterfazNotificadorEmail.resx">
       <DependentUpon>InterfazNotificadorEmail.cs</DependentUpon>
     </EmbeddedResource>
